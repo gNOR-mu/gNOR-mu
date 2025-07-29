@@ -14,3 +14,11 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+Pose experiencia en soporte de sistemas informáticos y desarrollo de soluciones con Odoo y Python.
+
+Actualmente estoy estudiando Java 21 con SpringBoot de forma profesional.
+
+- Todos los días estoy realizando ejercicios en LeetCode para mejorar mis habilidades en Java, el primer objetivo es llegar al top 50 000 -> [Soluciones de LeetCode Autosincronizadas](https://github.com/gNOR-mu/LeetCode).
+
+
+![LeetCode Stats](https://leetcard.jacoblin.cool/S3OmVUjryI?theme=chartreuse&font=Mukta%20Malar&ext=heatmap)
