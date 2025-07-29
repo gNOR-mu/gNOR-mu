@@ -1,24 +1,15 @@
-## Hi there 👋
+<h1 align="center">Hi 👋, I'm gNOR-mu</h1>
+<p align="left">
+</p>
 
-<!--
-**gNOR-mu/gNOR-mu** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+I have experience in computer systems support and developing solutions with Odoo and Python
 
-Here are some ideas to get you started:
+I am currently studying Java 21 with SpringBoot professionally.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
-Pose experiencia en soporte de sistemas informáticos y desarrollo de soluciones con Odoo y Python.
-
-Actualmente estoy estudiando Java 21 con SpringBoot de forma profesional.
-
-- Todos los días estoy realizando ejercicios en LeetCode para mejorar mis habilidades en Java, el primer objetivo es llegar al top 50 000 -> [Soluciones de LeetCode Autosincronizadas](https://github.com/gNOR-mu/LeetCode).
+- Every day I'm doing exercises in LeetCode to improve my Java skills, the first goal is to reach the top 50,000 
+- --> [Self-Synchronizing LeetCode Solutions](https://github.com/gNOR-mu/LeetCode).
 
 
 ![LeetCode Stats](https://leetcard.jacoblin.cool/S3OmVUjryI?theme=chartreuse&font=Mukta%20Malar&ext=heatmap)
+
+<p align="left"> <a href="https://www.docker.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="40" height="40"/> </a> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a> <a href="https://nextjs.org/" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/nextjs-2.svg" alt="nextjs" width="40" height="40"/> </a> <a href="https://www.oracle.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/oracle/oracle-original.svg" alt="oracle" width="40" height="40"/> </a> <a href="https://www.postgresql.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="40" height="40"/> </a> <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a> <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a> <a href="https://spring.io/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="spring" width="40" height="40"/> </a> <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40"/> </a> </p>
