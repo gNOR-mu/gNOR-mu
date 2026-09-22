@@ -1,0 +1,901 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 390" width="100%" height="100%" shape-rendering="crispEdges">
+  <defs>
+    <!-- Fondo gradiente exterior: cielo diurno soleado con calidez de pradera -->
+    <linearGradient id="outdoorSkyP4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" />
+      <stop offset="35%" stop-color="#0284c7" />
+      <stop offset="65%" stop-color="#38bdf8" />
+      <stop offset="85%" stop-color="#bae6fd" />
+      <stop offset="100%" stop-color="#fef08a" />
+    </linearGradient>
+
+    <!-- Resplandor solar potente -->
+    <filter id="sunGlowP4" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#fde047" flood-opacity="0.8"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="20" flood-color="#fb923c" flood-opacity="0.4"/>
+    </filter>
+
+    <!-- Resplandor divino del Pato de Goma -->
+    <filter id="duckAuraP4" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#facc15" flood-opacity="0.9"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="14" flood-color="#f59e0b" flood-opacity="0.5"/>
+    </filter>
+
+    <!-- Aura de alivio curativo (+1 HP) -->
+    <filter id="healGlowP4" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#22c55e" flood-opacity="0.9"/>
+    </filter>
+
+    <!-- Rayos solares translúcidos -->
+    <linearGradient id="sunbeamGradP4" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4" />
+      <stop offset="30%" stop-color="#fef08a" stop-opacity="0.22" />
+      <stop offset="70%" stop-color="#fde047" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#fde047" stop-opacity="0.0" />
+    </linearGradient>
+
+    <!-- Gradiente de pradera y tierra fértil para toda la mitad inferior (y=195 a 390) -->
+    <linearGradient id="meadowGroundP4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#16a34a" />
+      <stop offset="12%" stop-color="#15803d" />
+      <stop offset="35%" stop-color="#166534" />
+      <stop offset="60%" stop-color="#14532d" />
+      <stop offset="85%" stop-color="#064e3b" />
+      <stop offset="100%" stop-color="#022c22" />
+    </linearGradient>
+
+    <!-- Clip de sincronización -->
+    <clipPath id="syncClipP4">
+      <rect x="0" y="0" width="450" height="12" rx="3" />
+    </clipPath>
+  </defs>
+
+  <style>
+    .retro-text {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    /* ================= FASE 1: ESPERA Y PREPARACIÓN (0.0s - 45.5s) =================
+       Inicia 3 segundos después del final de la Parte 3 (42.5s + 3.0s = 45.5s).
+       A los 45.5s se desvanece para dar paso a la escena en el exterior.
+    ================================================================================ */
+    .waiting-phase {
+      animation: waitingFadeOut 0.3s ease-out 45.5s forwards;
+    }
+    @keyframes waitingFadeOut {
+      from { opacity: 1; visibility: visible; }
+      to { opacity: 0; visibility: hidden; display: none; }
+    }
+
+    /* Barra de sincronización de 45.0s */
+    .sync-fill {
+      animation: syncFill 45.0s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+    }
+    @keyframes syncFill {
+      0% { width: 0px; }
+      100% { width: 450px; }
+    }
+
+    .quote-glow {
+      animation: quoteSunPulse 2.5s ease-in-out infinite alternate;
+    }
+    @keyframes quoteSunPulse {
+      from { opacity: 0.85; fill: #fef08a; }
+      to { opacity: 1; fill: #ffffff; }
+    }
+
+    /* ================= FASE 2: ESCENA ACTIVA (45.5s en adelante) ================= */
+    .chapter-scene {
+      opacity: 0;
+      visibility: hidden;
+      animation: chapterSceneAppear 0.4s ease-out 45.5s forwards;
+    }
+    @keyframes chapterSceneAppear {
+      to { opacity: 1; visibility: visible; }
+    }
+
+    /* Stats del HUD superior: aparecen tras finalizar la barra de carga (45.5s) */
+    .hud-appear {
+      opacity: 0;
+      animation: hudFadeIn 0.4s ease-out 45.5s forwards;
+    }
+    @keyframes hudFadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Debuff persistente de deuda técnica */
+    .debuff-pulse {
+      animation: debuffPulse 1.2s ease-in-out infinite alternate;
+    }
+    @keyframes debuffPulse {
+      0% { fill: #f43f5e; }
+      100% { fill: #c084fc; }
+    }
+
+    /* Marcha del héroe entrando desde la izquierda (45.8s a 49.6s) */
+    .hero-entrance-anim {
+      animation: heroMarchEntry 3.8s cubic-bezier(0.2, 0.6, 0.3, 1) 45.8s forwards;
+    }
+    @keyframes heroMarchEntry {
+      0% { transform: translateX(-160px); }
+      100% { transform: translateX(0px); }
+    }
+
+    /* Paso tambaleante por bajo HP (delirio) */
+    .hero-wobble-step {
+      animation: heroWobble 0.35s ease-in-out 45.8s 11 alternate;
+    }
+    @keyframes heroWobble {
+      0% { transform: translateY(0) rotate(-2deg); }
+      100% { transform: translateY(-5px) rotate(3deg); }
+    }
+
+    /* Colapso de rodillas del héroe frente al pato (a los 59.1s = con la línea 3) */
+    .hero-kneel-anim {
+      transform-origin: 30px 95px;
+      animation: heroKneelDown 0.6s cubic-bezier(0.3, 1.2, 0.4, 1) 59.1s forwards;
+    }
+    @keyframes heroKneelDown {
+      0% { transform: translateY(0) scaleY(1); }
+      50% { transform: translateY(10px) scaleY(0.85); }
+      100% { transform: translateY(16px) scaleY(0.82); }
+    }
+
+    /* Pato de goma imperturbable: flotación/respiración sagrada */
+    .duck-float {
+      animation: duckGentleFloat 3s ease-in-out infinite alternate;
+    }
+    @keyframes duckGentleFloat {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-3px); }
+    }
+
+    /* Graznido del pato *SQUEAK!* (a los 61.1s con la línea 4) */
+    .duck-squeak-anim {
+      transform-origin: 24px 24px;
+      animation: duckSqueakBounce 0.4s cubic-bezier(0.1, 1.4, 0.2, 1) 61.1s;
+    }
+    @keyframes duckSqueakBounce {
+      0% { transform: scale(1); }
+      30% { transform: scale(1.25, 0.85); }
+      60% { transform: scale(0.9, 1.15); }
+      100% { transform: scale(1); }
+    }
+
+    /* Ondas de sonido *¡SQUEAK!* */
+    .squeak-wave {
+      opacity: 0;
+      animation: squeakWaveRing 1.2s ease-out 61.1s forwards;
+    }
+    @keyframes squeakWaveRing {
+      0% { opacity: 0; transform: scale(0.6); }
+      30% { opacity: 0.9; }
+      100% { opacity: 0; transform: scale(1.6); }
+    }
+
+    /* Salto del pato hacia la cabeza del héroe como sombrero sagrado (61.6s a 62.2s) */
+    .duck-hop-to-head {
+      transform-origin: 20px 20px;
+      animation: duckJumpToHat 0.65s cubic-bezier(0.25, 1, 0.4, 1) 61.6s forwards;
+    }
+    @keyframes duckJumpToHat {
+      0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+      }
+      20% {
+        transform: translate(-15px, -24px) scale(0.9, 1.15) rotate(-12deg);
+      }
+      50% {
+        transform: translate(-70px, -65px) scale(1.05, 0.95) rotate(-18deg);
+      }
+      80% {
+        transform: translate(-122px, -32px) scale(0.92, 1.05) rotate(-4deg);
+      }
+      92% {
+        transform: translate(-132px, -20px) scale(1.05, 0.78) rotate(0deg);
+      }
+      100% {
+        transform: translate(-132px, -23px) scale(0.88, 0.88) rotate(0deg);
+      }
+    }
+
+    /* Destello de sombrero legendario adoptado a los 62.2s */
+    .hat-crown-sparkle {
+      opacity: 0;
+      animation: hatCrownGlow 1.8s ease-out 62.2s forwards;
+    }
+    @keyframes hatCrownGlow {
+      0% { opacity: 0; transform: scale(0.4) rotate(0deg); }
+      35% { opacity: 1; transform: scale(1.2) rotate(15deg); }
+      70% { opacity: 0.9; transform: scale(1) rotate(0deg); }
+      100% { opacity: 0.8; transform: scale(1) rotate(0deg); }
+    }
+
+    /* ================= LETRAS FLOTANTES: DUELO 31 MINUTOS (TANGANANICA VS TANGANANÁ) =================
+       Duelo de delirio en 8 versos alternando izquierda y derecha entre 45.9s y 57.1s
+    ================================================================================================= */
+    .lyric-v1 {
+      opacity: 0;
+      animation: lyricDuelLeft 1.8s cubic-bezier(0.2, 0.8, 0.3, 1) 45.9s forwards;
+    }
+    .lyric-v2 {
+      opacity: 0;
+      animation: lyricDuelRight 1.6s cubic-bezier(0.2, 0.8, 0.3, 1) 47.5s forwards;
+    }
+    .lyric-v3 {
+      opacity: 0;
+      animation: lyricDuelLeft 1.6s cubic-bezier(0.2, 0.8, 0.3, 1) 48.9s forwards;
+    }
+    .lyric-v4 {
+      opacity: 0;
+      animation: lyricDuelRight 1.6s cubic-bezier(0.2, 0.8, 0.3, 1) 50.3s forwards;
+    }
+    .lyric-v5 {
+      opacity: 0;
+      animation: lyricDuelLeft 1.6s cubic-bezier(0.2, 0.8, 0.3, 1) 51.7s forwards;
+    }
+    .lyric-v6 {
+      opacity: 0;
+      animation: lyricDuelRight 1.4s cubic-bezier(0.2, 0.8, 0.3, 1) 53.1s forwards;
+    }
+    .lyric-v7 {
+      opacity: 0;
+      animation: lyricDuelLeft 1.4s cubic-bezier(0.2, 0.8, 0.3, 1) 54.3s forwards;
+    }
+    .lyric-v8 {
+      opacity: 0;
+      animation: lyricDuelRight 1.6s cubic-bezier(0.2, 0.8, 0.3, 1) 55.5s forwards;
+    }
+
+    @keyframes lyricDuelLeft {
+      0% { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(0.8); }
+      25% { opacity: 1; transform: translate(-14px, -14px) rotate(-4deg) scale(1.04); }
+      75% { opacity: 0.95; transform: translate(-26px, -28px) rotate(-7deg) scale(1); }
+      100% { opacity: 0; transform: translate(-38px, -42px) rotate(-10deg) scale(0.88); }
+    }
+
+    @keyframes lyricDuelRight {
+      0% { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(0.8); }
+      25% { opacity: 1; transform: translate(14px, -14px) rotate(4deg) scale(1.04); }
+      75% { opacity: 0.95; transform: translate(28px, -28px) rotate(7deg) scale(1); }
+      100% { opacity: 0; transform: translate(38px, -42px) rotate(10deg) scale(0.88); }
+    }
+
+    /* Partícula de curación +1 HP sobre el héroe a los 61.3s */
+    .heal-sparkle {
+      opacity: 0;
+      animation: healSparkleRise 1.8s ease-out 61.3s forwards;
+    }
+    @keyframes healSparkleRise {
+      0% { opacity: 0; transform: translateY(0) scale(0.8); }
+      30% { opacity: 1; }
+      100% { opacity: 0; transform: translateY(-28px) scale(1.2); }
+    }
+
+    /* Diálogos: la línea 1 va con el delirio (45.9s), y la línea 2 empieza a los 57.1s tras terminar el duelo */
+    .log-line-1 {
+      opacity: 0;
+      animation: logFadeIn 0.35s ease-out 45.9s forwards;
+    }
+    .log-line-2 {
+      opacity: 0;
+      animation: logFadeIn 0.35s ease-out 57.1s forwards;
+    }
+    .log-line-3 {
+      opacity: 0;
+      animation: logFadeIn 0.35s ease-out 59.1s forwards;
+    }
+    .log-line-4 {
+      opacity: 0;
+      animation: logFadeIn 0.35s ease-out 61.1s forwards;
+    }
+    .log-line-5 {
+      opacity: 0;
+      animation: logFadeIn 0.35s ease-out 63.1s forwards;
+    }
+    @keyframes logFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .alert-blink {
+      animation: alertBlink 0.6s steps(2, start) infinite;
+    }
+    @keyframes alertBlink {
+      to { visibility: hidden; }
+    }
+
+    /* Hojas y polen flotando en el viento */
+    .leaf-1 { animation: leafDrift 6s infinite linear; }
+    .leaf-2 { animation: leafDrift 8s infinite linear 2s; }
+    @keyframes leafDrift {
+      0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+      20% { opacity: 0.8; }
+      80% { opacity: 0.8; }
+      100% { transform: translate(-120px, 40px) rotate(180deg); opacity: 0; }
+    }
+
+    /* Esporas y polen dorado flotando */
+    .spore-1 { animation: sporeDrift 7s infinite ease-in-out; }
+    .spore-2 { animation: sporeDrift 9s infinite ease-in-out 3s; }
+    .spore-3 { animation: sporeDrift 8s infinite ease-in-out 1.5s; }
+    @keyframes sporeDrift {
+      0% { transform: translate(0, 0); opacity: 0; }
+      25% { opacity: 0.9; }
+      75% { opacity: 0.8; }
+      100% { transform: translate(-140px, 35px); opacity: 0; }
+    }
+  </style>
+
+  <!-- ================= FONDO Y PAISAJE EXTERIOR MEJORADO ================= -->
+  <!-- Cielo exterior brillante con gradiente cálido -->
+  <rect width="800" height="390" rx="12" fill="url(#outdoorSkyP4)" />
+
+  <!-- Sol radiante en el firmamento -->
+  <circle cx="680" cy="65" r="38" fill="#ffffff" filter="url(#sunGlowP4)" />
+  <circle cx="680" cy="65" r="54" fill="#fef08a" opacity="0.35" />
+  <circle cx="680" cy="65" r="76" fill="#fde047" opacity="0.18" />
+
+  <!-- Rayos de sol celestiales translúcidos (God rays) -->
+  <g>
+    <polygon points="680,65 100,205 170,205" fill="url(#sunbeamGradP4)" />
+    <polygon points="680,65 260,205 350,205" fill="url(#sunbeamGradP4)" />
+    <polygon points="680,65 460,205 560,205" fill="url(#sunbeamGradP4)" />
+    <polygon points="680,65 630,205 750,205" fill="url(#sunbeamGradP4)" />
+  </g>
+
+  <!-- Nubes pixel art flotantes en varias capas -->
+  <g fill="#ffffff" opacity="0.9">
+    <rect x="90" y="38" width="52" height="9" rx="2" />
+    <rect x="104" y="30" width="30" height="9" rx="2" />
+    <rect x="114" y="24" width="14" height="7" rx="2" />
+
+    <rect x="330" y="25" width="60" height="10" rx="2" />
+    <rect x="345" y="16" width="36" height="10" rx="2" />
+    <rect x="358" y="10" width="16" height="7" rx="2" />
+
+    <rect x="490" y="52" width="44" height="8" rx="2" />
+    <rect x="502" y="45" width="22" height="8" rx="2" />
+  </g>
+
+  <!-- Nubes bajas translúcidas lejanas -->
+  <g fill="#e0f2fe" opacity="0.5">
+    <rect x="210" y="70" width="38" height="6" rx="2" />
+    <rect x="580" y="85" width="48" height="6" rx="2" />
+  </g>
+
+  <!-- ================= CORDILLERA Y MONTAÑAS NEVADAS ================= -->
+  <!-- Montañas lejanas en azul marino/índigo -->
+  <polygon points="20,200 110,85 210,200" fill="#1e293b" opacity="0.55" />
+  <polygon points="150,200 260,65 370,200" fill="#0f172a" opacity="0.65" />
+  <polygon points="300,200 410,95 530,200" fill="#1e293b" opacity="0.5" />
+  <polygon points="460,200 580,60 700,200" fill="#0f172a" opacity="0.65" />
+
+  <!-- Laderas iluminadas por el sol -->
+  <polygon points="110,85 210,200 110,200" fill="#0284c7" opacity="0.4" />
+  <polygon points="260,65 370,200 260,200" fill="#0369a1" opacity="0.5" />
+  <polygon points="410,95 530,200 410,200" fill="#0284c7" opacity="0.4" />
+  <polygon points="580,60 700,200 580,200" fill="#0369a1" opacity="0.5" />
+
+  <!-- Crestas de nieve pixel art en las cumbres -->
+  <polygon points="110,85 96,105 110,102 124,105" fill="#f0f9ff" />
+  <polygon points="260,65 242,90 260,86 278,90" fill="#ffffff" />
+  <polygon points="410,95 398,112 410,109 422,112" fill="#f0f9ff" />
+  <polygon points="580,60 560,88 580,84 600,88" fill="#ffffff" />
+
+  <!-- ================= BASE DE PRADERA Y SUELO INFERIOR (y=195 a 390) ================= -->
+  <!-- Relleno completo de pradera y tierra fértil para toda la mitad inferior -->
+  <rect x="0" y="195" width="800" height="195" fill="url(#meadowGroundP4)" />
+
+  <!-- Colinas verdes onduladas intermedias y boscosas -->
+  <ellipse cx="160" cy="202" rx="220" ry="34" fill="#064e3b" />
+  <ellipse cx="640" cy="202" rx="240" ry="36" fill="#047857" />
+  <ellipse cx="380" cy="205" rx="280" ry="30" fill="#15803d" />
+  <ellipse cx="520" cy="208" rx="230" ry="26" fill="#16a34a" />
+  <ellipse cx="240" cy="208" rx="210" ry="24" fill="#22c55e" />
+
+  <!-- Capas de lomas y colinas que cubren toda la parte inferior hasta el borde -->
+  <ellipse cx="400" cy="245" rx="420" ry="45" fill="#15803d" opacity="0.9" />
+  <ellipse cx="180" cy="275" rx="300" ry="45" fill="#166534" opacity="0.85" />
+  <ellipse cx="620" cy="275" rx="320" ry="45" fill="#14532d" opacity="0.85" />
+  <ellipse cx="400" cy="325" rx="440" ry="60" fill="#064e3b" opacity="0.9" />
+  <ellipse cx="400" cy="370" rx="460" ry="50" fill="#022c22" />
+
+  <!-- Detalles de pasto y flores silvestres en la pradera baja (visibles durante la espera) -->
+  <g fill="#4ade80" opacity="0.75">
+    <rect x="80" y="240" width="3" height="4" /><rect x="83" y="238" width="3" height="6" />
+    <rect x="220" y="260" width="3" height="5" /><rect x="223" y="258" width="3" height="7" fill="#86efac" />
+    <rect x="360" y="245" width="3" height="5" /><rect x="363" y="243" width="3" height="7" />
+    <rect x="520" y="255" width="3" height="5" /><rect x="523" y="253" width="3" height="7" fill="#86efac" />
+    <rect x="680" y="245" width="3" height="4" /><rect x="683" y="242" width="3" height="7" />
+    <rect x="150" y="310" width="4" height="6" /><rect x="310" y="325" width="4" height="6" />
+    <rect x="490" y="315" width="4" height="6" /><rect x="650" y="320" width="4" height="6" />
+  </g>
+  <g fill="#facc15" opacity="0.8">
+    <circle cx="120" cy="250" r="2" /><circle cx="280" cy="270" r="2.5" />
+    <circle cx="450" cy="260" r="2" /><circle cx="610" cy="265" r="2.5" />
+    <circle cx="190" cy="330" r="2" fill="#38bdf8" /><circle cx="580" cy="335" r="2" fill="#f43f5e" />
+  </g>
+
+  <!-- ================= ÁRBOLES Y PINOS PIXEL ART ================= -->
+  <!-- Arboleda izquierda (Fondo detrás de la marcha) -->
+  <g transform="translate(65, 115)">
+    <!-- Pino alto izquierdo -->
+    <rect x="18" y="46" width="6" height="34" fill="#451a03" />
+    <polygon points="21,12 8,30 34,30" fill="#064e3b" />
+    <polygon points="21,24 5,42 37,42" fill="#047857" />
+    <polygon points="21,36 2,56 40,56" fill="#15803d" />
+    <polygon points="21,12 21,30 34,30" fill="#10b981" opacity="0.3" /> <!-- Brillo de luz -->
+    <polygon points="21,24 21,42 37,42" fill="#10b981" opacity="0.3" />
+    <polygon points="21,36 21,56 40,56" fill="#10b981" opacity="0.3" />
+
+    <!-- Pino mediano compañero -->
+    <rect x="44" y="52" width="5" height="26" fill="#451a03" />
+    <polygon points="46,26 34,40 58,40" fill="#064e3b" />
+    <polygon points="46,36 30,52 62,52" fill="#047857" />
+    <polygon points="46,46 26,62 66,62" fill="#15803d" />
+    <polygon points="46,26 46,40 58,40" fill="#10b981" opacity="0.3" />
+    <polygon points="46,36 46,52 62,52" fill="#10b981" opacity="0.3" />
+
+    <!-- Hongos silvestres al pie de los pinos -->
+    <g transform="translate(10, 70)">
+      <rect x="0" y="4" width="3" height="4" fill="#fef08a" />
+      <ellipse cx="1.5" cy="4" rx="4" ry="3" fill="#ef4444" />
+      <circle cx="1.5" cy="2.5" r="0.8" fill="#ffffff" />
+      <rect x="7" y="5" width="2" height="3" fill="#fef08a" />
+      <ellipse cx="8" cy="5" rx="3" ry="2" fill="#ef4444" />
+    </g>
+  </g>
+
+  <!-- Arboleda derecha (Fondo detrás del tocón sagrado) -->
+  <g transform="translate(660, 110)">
+    <!-- Pino alto derecho -->
+    <rect x="22" y="48" width="6" height="36" fill="#451a03" />
+    <polygon points="25,10 10,32 40,32" fill="#064e3b" />
+    <polygon points="25,24 6,46 44,46" fill="#047857" />
+    <polygon points="25,38 2,60 48,60" fill="#15803d" />
+    <polygon points="25,10 25,32 40,32" fill="#22c55e" opacity="0.35" />
+    <polygon points="25,24 25,46 44,46" fill="#22c55e" opacity="0.35" />
+    <polygon points="25,38 25,60 48,60" fill="#22c55e" opacity="0.35" />
+
+    <!-- Árbol de copa redondeada / roble de bosque -->
+    <rect x="54" y="50" width="6" height="32" fill="#5c2e0b" />
+    <circle cx="57" cy="42" r="18" fill="#15803d" />
+    <circle cx="50" cy="38" r="14" fill="#16a34a" />
+    <circle cx="64" cy="38" r="14" fill="#22c55e" />
+    <circle cx="58" cy="30" r="12" fill="#4ade80" opacity="0.7" />
+  </g>
+
+  <!-- Poste indicador rústico de camino RPG (x=160, y=168) -->
+  <g transform="translate(155, 166)">
+    <rect x="4" y="8" width="4" height="22" fill="#5c2e0b" />
+    <polygon points="4,4 6,0 8,4" fill="#78350f" />
+    <!-- Letrero de madera con flecha -->
+    <polygon points="0,6 26,6 32,12 26,18 0,18" fill="#a16207" stroke="#451a03" stroke-width="1" />
+    <text class="retro-text" x="4" y="15" font-size="6" fill="#fef08a" font-weight="bold">➡ SABIOS</text>
+  </g>
+
+  <!-- ================= SUELO, SENDERO Y FLORA DETALLADA (y=195) ================= -->
+  <g transform="translate(40, 195)">
+    <!-- Base de tierra fértil y raíces -->
+    <rect x="0" y="0" width="720" height="5" fill="#713f12" />
+    <rect x="10" y="4" width="700" height="2" fill="#451a03" />
+
+    <!-- Sendero de piedras/tierra hacia los Sabios con textura -->
+    <rect x="40" y="0" width="640" height="3" fill="#ca8a04" opacity="0.75" />
+    <rect x="120" y="1" width="14" height="2" fill="#854d0e" />
+    <rect x="180" y="1" width="12" height="2" fill="#78350f" />
+    <rect x="250" y="0" width="16" height="2" fill="#a16207" />
+    <rect x="310" y="1" width="18" height="2" fill="#854d0e" />
+    <rect x="420" y="1" width="14" height="2" fill="#78350f" />
+    <rect x="540" y="1" width="18" height="2" fill="#854d0e" />
+    <rect x="620" y="0" width="12" height="2" fill="#a16207" />
+
+    <!-- Mechones de césped pixel art -->
+    <g fill="#4ade80">
+      <rect x="50" y="-3" width="2" height="3" /><rect x="53" y="-5" width="2" height="5" />
+      <rect x="110" y="-4" width="2" height="4" /><rect x="113" y="-2" width="2" height="2" />
+      <rect x="220" y="-4" width="2" height="4" /><rect x="223" y="-6" width="2" height="6" fill="#86efac" />
+      <rect x="360" y="-3" width="2" height="3" /><rect x="363" y="-5" width="2" height="5" />
+      <rect x="460" y="-4" width="2" height="4" /><rect x="463" y="-6" width="2" height="6" fill="#86efac" />
+      <rect x="590" y="-5" width="2" height="5" /><rect x="593" y="-3" width="2" height="3" />
+      <rect x="670" y="-4" width="2" height="4" /><rect x="673" y="-6" width="2" height="6" fill="#86efac" />
+    </g>
+
+    <!-- Flores silvestres detalladas (Amapolas, margaritas, campanillas y lavandas) -->
+    <!-- Amapolas rojas -->
+    <g fill="#f43f5e">
+      <rect x="80" y="-5" width="4" height="4" rx="1" /><rect x="81" y="-1" width="2" height="3" fill="#16a34a" />
+      <rect x="235" y="-6" width="4" height="4" rx="1" /><rect x="236" y="-2" width="2" height="4" fill="#16a34a" />
+      <rect x="640" y="-5" width="4" height="4" rx="1" /><rect x="641" y="-1" width="2" height="3" fill="#16a34a" />
+    </g>
+    <!-- Margaritas amarillas -->
+    <g fill="#facc15">
+      <rect x="135" y="-5" width="4" height="4" rx="1" /><circle cx="137" cy="-3" r="1" fill="#ea580c" /><rect x="136" y="-1" width="2" height="3" fill="#16a34a" />
+      <rect x="440" y="-5" width="4" height="4" rx="1" /><circle cx="442" cy="-3" r="1" fill="#ea580c" /><rect x="441" y="-1" width="2" height="3" fill="#16a34a" />
+    </g>
+    <!-- Campánulas azules -->
+    <g fill="#38bdf8">
+      <rect x="300" y="-6" width="4" height="4" rx="1" /><rect x="301" y="-2" width="2" height="4" fill="#16a34a" />
+      <rect x="580" y="-5" width="4" height="4" rx="1" /><rect x="581" y="-1" width="2" height="3" fill="#16a34a" />
+    </g>
+    <!-- Lavandas púrpuras -->
+    <g fill="#c084fc">
+      <rect x="190" y="-7" width="3" height="6" rx="1" /><rect x="191" y="-1" width="1" height="3" fill="#16a34a" />
+      <rect x="605" y="-7" width="3" height="6" rx="1" /><rect x="606" y="-1" width="1" height="3" fill="#16a34a" />
+    </g>
+  </g>
+
+  <!-- ================= ELEMENTOS FLOTANTES EN LA BRISA ================= -->
+  <!-- Hojas verdes flotando -->
+  <g fill="#86efac">
+    <rect class="leaf-1" x="650" y="100" width="4" height="3" rx="1" />
+    <rect class="leaf-2" x="500" y="125" width="5" height="3" rx="1" />
+    <rect class="leaf-1" x="340" y="135" width="4" height="4" rx="1" />
+  </g>
+
+  <!-- Esporas y partículas de polen dorado flotando mágicamente -->
+  <g fill="#fef08a">
+    <circle class="spore-1" cx="620" cy="80" r="1.5" />
+    <circle class="spore-2" cx="450" cy="95" r="1.8" />
+    <circle class="spore-3" cx="280" cy="110" r="1.4" />
+    <circle class="spore-1" cx="540" cy="130" r="1.2" />
+    <circle class="spore-2" cx="370" cy="70" r="1.6" fill="#fde047" />
+  </g>
+
+  <!-- Borde exterior arcade -->
+  <rect x="10" y="10" width="780" height="370" fill="none" stroke="#064e3b" stroke-width="4" rx="8" />
+  <rect x="16" y="16" width="768" height="358" fill="none" stroke="#047857" stroke-width="2" />
+  <rect x="18" y="18" width="764" height="354" fill="none" stroke="#facc15" stroke-width="1" opacity="0.4" />
+
+  <!-- Esquinas decorativas doradas / bosque sagrado -->
+  <g fill="#facc15">
+    <rect x="20" y="20" width="8" height="24" /><rect x="20" y="20" width="24" height="8" />
+    <rect x="756" y="20" width="24" height="8" /><rect x="772" y="20" width="8" height="24" />
+    <rect x="20" y="346" width="8" height="24" /><rect x="20" y="362" width="24" height="8" />
+    <rect x="756" y="362" width="24" height="8" /><rect x="772" y="346" width="8" height="24" />
+  </g>
+
+  <!-- ================= ENCABEZADO / HUD STATS ================= -->
+  <g class="retro-text">
+    <g class="hud-appear">
+      <!-- VIDA (HP): Inicia a 100/999 (heredado del final de la Pt. 3). A los 61.3s con el destello de curación sube a 101/999 (+1 HP) -->
+      <text x="36" y="42" font-size="12" fill="#ef4444">
+        ♥ HP 100/999
+        <set attributeName="visibility" to="hidden" begin="61.3s" fill="freeze" />
+      </text>
+      <text x="36" y="42" font-size="12" fill="#22c55e" visibility="hidden">
+        ♥ HP 101/999
+        <set attributeName="visibility" to="visible" begin="61.3s" fill="freeze" />
+        <set attributeName="fill" to="#ffffff" begin="61.3s" dur="0.2s" />
+        <set attributeName="fill" to="#22c55e" begin="61.5s" dur="0.4s" />
+      </text>
+
+      <!-- MANÁ (MP): 000/999 agotado sin cambios -->
+      <text x="180" y="42" font-size="12" fill="#94a3b8">★ MP 000/999</text>
+
+      <!-- Nombre del héroe -->
+      <text x="36" y="60" font-size="11" fill="#00ffcc">⚔ gNOR-mu</text>
+
+      <!-- DEBUFF: DEUDA TÉCNICA -->
+      <g transform="translate(36, 67)">
+        <rect x="0" y="0" width="138" height="15" fill="#250918" stroke="#f43f5e" stroke-width="1" rx="3" />
+        <text class="debuff-pulse" x="6" y="11" font-size="9">☠ DEBUFF: DEUDA TÉCNICA</text>
+      </g>
+    </g>
+
+    <!-- Título del capítulo -->
+    <text x="760" y="44" text-anchor="end" font-size="12" fill="#facc15">CAPÍTULO IV: EL ORÁCULO AMARILLO</text>
+  </g>
+
+  <!-- ================= FASE DE ESPERA: RESUMEN Y SINCRONIZACIÓN (0.0s - 45.5s) ================= -->
+  <g class="waiting-phase">
+    <g transform="translate(130, 110)">
+      <!-- Marco arcade oscuro con borde verde bosque / dorado -->
+      <rect x="0" y="0" width="540" height="150" fill="#061a12" opacity="0.96" />
+      <rect x="0" y="0" width="540" height="150" fill="none" stroke="#10b981" stroke-width="2" />
+      <rect x="4" y="4" width="532" height="142" fill="none" stroke="#064e3b" stroke-width="1.5" />
+
+      <!-- Esquinas decorativas doradas -->
+      <rect x="0" y="0" width="8" height="8" fill="#facc15" />
+      <rect x="532" y="0" width="8" height="8" fill="#facc15" />
+      <rect x="0" y="142" width="8" height="8" fill="#facc15" />
+      <rect x="532" y="142" width="8" height="8" fill="#facc15" />
+
+      <!-- Título de sincronización -->
+      <text class="retro-text" x="270" y="32" text-anchor="middle" font-size="11" fill="#6ee7b7" letter-spacing="1">
+        ⧖ SINCRONIZANDO MARCHA HACIA EL EXTERIOR...
+      </text>
+
+      <!-- Barra de sincronización (0% a 100% en 45.0s) -->
+      <g transform="translate(45, 48)">
+        <rect x="0" y="0" width="450" height="12" rx="3" fill="#022c22" stroke="#047857" stroke-width="1.5" />
+        <rect class="sync-fill" x="0" y="0" width="0" height="12" rx="3" fill="url(#sunGlowP4)" />
+        <rect class="sync-fill" x="0" y="0" width="0" height="12" rx="3" fill="#facc15" />
+      </g>
+
+      <!-- Cita legendaria sobre Rubber Duck Debugging -->
+      <g transform="translate(270, 96)">
+        <text class="retro-text quote-glow" x="0" y="0" text-anchor="middle" font-size="10.5" letter-spacing="1">
+          “Si no puedes explicar tu código a un pato de goma, no lo entiendes.”
+        </text>
+        <text class="retro-text" x="0" y="24" text-anchor="middle" font-size="9.5" fill="#a7f3d0" letter-spacing="1">
+          — El Principio del Rubber Duck Debugging
+        </text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ================= FASE 2: ESCENA CENTRAL Y DIÁLOGOS (45.5s EN ADELANTE) ================= -->
+  <g class="chapter-scene">
+
+    <!-- 1. TOCÓN DE ÁRBOL Y EL PATO DE GOMA (Ubicado a la derecha x=480, y=135) -->
+    <g transform="translate(480, 130)">
+      <!-- Sombra del tocón -->
+      <ellipse cx="40" cy="68" rx="36" ry="7" fill="#064e3b" opacity="0.6" />
+
+      <!-- Tocón de roble ancestral pixel art -->
+      <!-- Corteza exterior -->
+      <rect x="10" y="24" width="60" height="42" fill="#5c2e0b" rx="2" />
+      <rect x="6" y="32" width="68" height="32" fill="#78350f" rx="3" />
+      <rect x="14" y="28" width="6" height="34" fill="#451a03" />
+      <rect x="36" y="32" width="8" height="32" fill="#451a03" />
+      <rect x="58" y="28" width="6" height="34" fill="#451a03" />
+      <!-- Parte superior del tocón (anillos del tronco) -->
+      <ellipse cx="40" cy="24" rx="30" ry="10" fill="#a16207" stroke="#78350f" stroke-width="2" />
+      <ellipse cx="40" cy="24" rx="20" ry="6" fill="#ca8a04" />
+      <ellipse cx="40" cy="24" rx="10" ry="3" fill="#a16207" />
+      <!-- Brote verde en el tronco -->
+      <rect x="66" y="36" width="6" height="3" fill="#22c55e" rx="1" />
+      <rect x="70" y="33" width="4" height="3" fill="#4ade80" rx="1" />
+
+      <!-- EL PATO DE GOMA AMARILLO PIXEL ART (En su aura sagrada) -->
+      <g transform="translate(20, -10)" filter="url(#duckAuraP4)">
+        <g class="duck-float">
+          <g class="duck-squeak-anim">
+            <g class="duck-hop-to-head">
+              <!-- Sombra minúscula del patito sobre la madera (se desvanece al saltar) -->
+              <ellipse cx="20" cy="30" rx="16" ry="4" fill="#451a03" opacity="0.7">
+                <set attributeName="opacity" to="0" begin="61.6s" fill="freeze" />
+              </ellipse>
+
+              <!-- Destello de sombrero sagrado / corona cuando aterriza en la cabeza (62.2s) -->
+              <g class="hat-crown-sparkle" transform="translate(28, -6)">
+                <polygon points="0,-8 2,-2 8,0 2,2 0,8 -2,2 -8,0 -2,-2" fill="#ffffff" />
+                <polygon points="12,-4 13,-1 16,0 13,1 12,4 11,1 8,0 11,-1" fill="#fde047" />
+              </g>
+
+              <!-- Cuerpo del pato de goma amarillo -->
+              <ellipse cx="20" cy="20" rx="16" ry="11" fill="#facc15" />
+              <rect x="6" y="14" width="26" height="12" fill="#facc15" rx="4" />
+              <!-- Cola puntiaguda curvada hacia arriba -->
+              <polygon points="4,20 0,12 8,17" fill="#eab308" />
+
+              <!-- Ala del pato -->
+              <path d="M12,18 q6,-6 14,0 q-4,6 -14,0 z" fill="#eab308" />
+              <rect x="16" y="17" width="8" height="2" fill="#fef08a" />
+
+              <!-- Cabeza del pato -->
+              <circle cx="28" cy="11" r="9" fill="#facc15" />
+              <circle cx="28" cy="10" r="8" fill="#fde047" />
+
+              <!-- Pico de pato naranja brillante -->
+              <polygon points="35,11 44,13 36,16" fill="#ea580c" />
+              <rect x="36" y="13" width="7" height="2" fill="#f97316" />
+
+              <!-- Ojo del pato (Mirada fija, serena, imperturbable) -->
+              <circle cx="30" cy="9" r="2.5" fill="#0f172a" />
+              <circle cx="31" cy="8.5" r="0.8" fill="#ffffff" />
+            </g>
+          </g>
+        </g>
+      </g>
+
+      <!-- Ondas de sonido circulares expandiéndose al hacer SQUEAK (61.1s) -->
+      <g class="squeak-wave" transform="translate(40, 8)">
+        <circle cx="0" cy="0" r="16" fill="none" stroke="#facc15" stroke-width="2" />
+        <circle cx="0" cy="0" r="28" fill="none" stroke="#38bdf8" stroke-width="1.5" />
+        <!-- Onomatopeya flotante *¡SQUEAK!* -->
+        <text class="retro-text" x="18" y="-12" font-size="12" fill="#fde047">¡SQUEAK!</text>
+      </g>
+    </g>
+
+    <!-- 2. EL HÉROE gNOR-mu EN CAMINO (Entra marchando y colapsa ante el pato en x=360, y=95) -->
+    <!-- Grupo que maneja la entrada caminando desde la izquierda -->
+    <g transform="translate(360, 95)">
+      <g class="hero-entrance-anim">
+        <!-- Grupo del tambaleo por bajo HP -->
+        <g class="hero-wobble-step">
+          <!-- Grupo que ejecuta el colapso de rodillas a los 59.1s -->
+          <g class="hero-kneel-anim">
+            <!-- Sombra del héroe en el pasto -->
+            <ellipse cx="28" cy="100" rx="20" ry="5" fill="#064e3b" opacity="0.6" />
+
+            <!-- Destello de curación +1 HP a los 61.3s -->
+            <g class="heal-sparkle" transform="translate(28, 20)" filter="url(#healGlowP4)">
+              <text class="retro-text" x="0" y="0" font-size="12" fill="#22c55e" text-anchor="middle">+1 HP</text>
+              <circle cx="-12" cy="-6" r="2" fill="#86efac" />
+              <circle cx="14" cy="-8" r="2" fill="#86efac" />
+            </g>
+
+            <!-- Letras flotantes del duelo de 31 Minutos (Delirio del héroe) -->
+            <g transform="translate(28, -8)">
+              <!-- Verso 1: —A mí me gusta el Tangananica (45.9s) -->
+              <g class="lyric-v1">
+                <text class="retro-text" x="-10" y="0" font-size="10" fill="#fef08a" text-anchor="middle">—A mí me gusta el Tangananica</text>
+              </g>
+              <!-- Verso 2: —Y yo prefiero el Tangananá (47.5s) -->
+              <g class="lyric-v2">
+                <text class="retro-text" x="12" y="-2" font-size="10" fill="#fed7aa" text-anchor="middle">—Y yo prefiero el Tangananá</text>
+              </g>
+              <!-- Verso 3: —La mejor frase es Tangananica (48.9s) -->
+              <g class="lyric-v3">
+                <text class="retro-text" x="-10" y="-4" font-size="10" fill="#fef08a" text-anchor="middle">—La mejor frase es Tangananica</text>
+              </g>
+              <!-- Verso 4: —El mejor verso es Tangananá (50.3s) -->
+              <g class="lyric-v4">
+                <text class="retro-text" x="12" y="-6" font-size="10" fill="#fed7aa" text-anchor="middle">—El mejor verso es Tangananá</text>
+              </g>
+              <!-- Verso 5: —Tangananica, nica, nica, nica (51.7s) -->
+              <g class="lyric-v5">
+                <text class="retro-text" x="-10" y="-8" font-size="10" fill="#fef08a" text-anchor="middle">—Tangananica, nica, nica, nica</text>
+              </g>
+              <!-- Verso 6: —Tangananá (53.1s) -->
+              <g class="lyric-v6">
+                <text class="retro-text" x="14" y="-10" font-size="11" fill="#fde047" font-weight="900" text-anchor="middle">—Tangananá</text>
+              </g>
+              <!-- Verso 7: —Todo lo explica. ¡Ja! (54.3s) -->
+              <g class="lyric-v7">
+                <text class="retro-text" x="-10" y="-12" font-size="10.5" fill="#fef08a" text-anchor="middle">—Todo lo explica. ¡Ja!</text>
+              </g>
+              <!-- Verso 8: —No explica na’ (55.5s a 57.1s) -->
+              <g class="lyric-v8">
+                <text class="retro-text" x="14" y="-14" font-size="11" fill="#fed7aa" font-weight="900" text-anchor="middle">—No explica na’</text>
+              </g>
+            </g>
+
+            <!-- Capa roja ondeando atrás -->
+            <rect x="6" y="40" width="10" height="44" fill="#b91c1c" />
+            <rect x="2" y="48" width="6" height="38" fill="#991b1b" />
+
+            <!-- Botas de combate acorazadas -->
+            <rect x="18" y="86" width="10" height="12" fill="#334155" />
+            <rect x="16" y="94" width="14" height="4" fill="#1e293b" />
+            <rect x="30" y="86" width="10" height="12" fill="#475569" />
+            <rect x="28" y="94" width="14" height="4" fill="#1e293b" />
+
+            <!-- Pantalón / grebas -->
+            <rect x="20" y="70" width="18" height="18" fill="#1e1b4b" />
+
+            <!-- Cinturón con hebilla dorada -->
+            <rect x="18" y="66" width="22" height="5" fill="#78350f" />
+            <rect x="26" y="66" width="6" height="5" fill="#facc15" />
+
+            <!-- Coraza de acero retro -->
+            <rect x="18" y="38" width="22" height="28" fill="#38bdf8" />
+            <rect x="22" y="42" width="14" height="20" fill="#bae6fd" />
+            <!-- Hombreras -->
+            <rect x="12" y="36" width="8" height="10" fill="#0284c7" />
+            <rect x="38" y="36" width="8" height="10" fill="#0284c7" />
+
+            <!-- Brazo derecho con Escudo Pixel Art -->
+            <g transform="translate(0, 42)">
+              <path d="M4,0 h16 v4 h4 v6 h4 v12 h-2 v6 h-2 v4 h-2 v4 h-2 v2 h-2 v2 h-2 v-2 h-2 v-2 h-2 v-4 h-2 v-4 h-2 v-6 h-2 v-12 h4 v-6 h4 v-4 z" fill="#131024" />
+              <path d="M6,2 h12 v4 h4 v6 h4 v10 h-2 v6 h-2 v4 h-2 v4 h-2 v2 h-2 v-2 h-2 v-4 h-2 v-4 h-2 v-6 h-2 v-10 h4 v-6 h4 v-4 z" fill="#fdb813" />
+              <path d="M8,4 h8 v6 h4 v8 h-2 v6 h-2 v4 h-2 v2 h-2 v-2 h-2 v-4 h-2 v-6 h-2 v-8 h4 v-6 z" fill="#2b1f54" />
+              <rect x="10" y="8" width="4" height="14" fill="#00ffff" />
+              <rect x="6" y="12" width="12" height="4" fill="#00ffff" />
+              <rect x="11" y="9" width="2" height="12" fill="#ffffff" />
+              <rect x="7" y="13" width="10" height="2" fill="#ffffff" />
+              <rect x="7" y="5" width="2" height="2" fill="#ffe082" />
+              <rect x="15" y="5" width="2" height="2" fill="#ffe082" />
+            </g>
+
+            <!-- Cabeza, rostro y vincha roja -->
+            <rect x="20" y="16" width="18" height="20" fill="#fcd34d" />
+            <rect x="16" y="10" width="26" height="10" fill="#475569" />
+            <rect x="14" y="14" width="6" height="12" fill="#334155" />
+            <rect x="18" y="20" width="22" height="4" fill="#ef4444" />
+            <!-- Ojos del héroe: cambian a mirada feliz/aliviada cuando el pato salta a su cabeza (62.2s) -->
+            <g id="hero-tired-eyes">
+              <set attributeName="visibility" to="hidden" begin="62.2s" fill="freeze" />
+              <rect x="28" y="24" width="4" height="3" fill="#0f172a" />
+              <rect x="34" y="24" width="4" height="3" fill="#0f172a" />
+              <rect x="29" y="24" width="1" height="1" fill="#ffffff" />
+              <rect x="35" y="24" width="1" height="1" fill="#ffffff" />
+            </g>
+            <g id="hero-happy-eyes" visibility="hidden">
+              <set attributeName="visibility" to="visible" begin="62.2s" fill="freeze" />
+              <!-- Ojos felices estilo ^ ^ pixel art con alivio y determinación -->
+              <rect x="28" y="25" width="2" height="2" fill="#0f172a" />
+              <rect x="30" y="23" width="2" height="2" fill="#0f172a" />
+              <rect x="32" y="25" width="2" height="2" fill="#0f172a" />
+              <rect x="34" y="25" width="2" height="2" fill="#0f172a" />
+              <rect x="36" y="23" width="2" height="2" fill="#0f172a" />
+              <rect x="38" y="25" width="2" height="2" fill="#0f172a" />
+            </g>
+
+            <!-- Brazo izquierdo con Espada clavada en el suelo como bastón de apoyo -->
+            <rect x="38" y="44" width="12" height="8" fill="#0284c7" />
+            <rect x="46" y="46" width="8" height="8" fill="#f59e0b" />
+            <rect x="50" y="48" width="4" height="5" fill="#d97706" />
+
+            <!-- ESPADA CLAVADA VERTICALMENTE EN TIERRA -->
+            <g transform="translate(52, 54)">
+              <rect x="-2" y="-30" width="4" height="10" fill="#78350f" />
+              <rect x="-3" y="-33" width="6" height="3" fill="#facc15" />
+              <rect x="-7" y="-20" width="14" height="4" fill="#facc15" />
+              <rect x="-5" y="-18" width="10" height="2" fill="#fef08a" />
+              <rect x="-3" y="-16" width="6" height="52" fill="#b2ebf2" />
+              <rect x="-1" y="-16" width="2" height="52" fill="#ffffff" />
+              <rect x="-2" y="34" width="4" height="6" fill="#15803d" /> <!-- Clavada en pasto -->
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- ================= CUADRO DE DIÁLOGO / ACTION LOG (ALINEADO EXACTO Y=205) ================= -->
+  <g class="chapter-scene" transform="translate(30, 205)">
+    <!-- Fondo translúcido caja de diálogo arcade de pradera/bosque -->
+    <rect x="0" y="0" width="740" height="165" rx="6" fill="#061a14" opacity="0.96" />
+    <rect x="0" y="0" width="740" height="165" rx="6" fill="none" stroke="#10b981" stroke-width="2.5" />
+    <rect x="4" y="4" width="732" height="157" rx="4" fill="none" stroke="#064e3b" stroke-width="1.5" />
+
+    <!-- Esquinas decorativas verdes de la caja de diálogo -->
+    <rect x="0" y="0" width="8" height="8" fill="#22c55e" />
+    <rect x="732" y="0" width="8" height="8" fill="#22c55e" />
+    <rect x="0" y="157" width="8" height="8" fill="#22c55e" />
+    <rect x="732" y="157" width="8" height="8" fill="#22c55e" />
+
+    <!-- Encabezado de la ventana -->
+    <g class="log-line-1">
+      <rect x="14" y="10" width="712" height="20" fill="#064e3b" />
+      <text class="retro-text" x="26" y="24" font-size="10" fill="#a7f3d0" letter-spacing="1">
+        🦆 CRÓNICAS DEL PEREGRINAJE • EL ENCUENTRO EN EL TOCÓN SAGRADO
+      </text>
+      <text class="retro-text" x="712" y="24" text-anchor="end" font-size="9" fill="#facc15">
+        [DELIRIO ACTIVO]
+      </text>
+    </g>
+
+    <!-- EVENTO 1: DELIRIO POR BAJO HP (45.9s) -->
+    <g class="log-line-1">
+      <text class="retro-text" x="24" y="54" font-size="10" fill="#cbd5e1">
+        ▶ Marchando bajo el sol a 100 HP, la mente del héroe delira: ♫ "A mí me gusta el Tangananica..." ♫
+      </text>
+    </g>
+
+    <!-- EVENTO 2: EL PATO EN EL TOCÓN (57.1s) -->
+    <g class="log-line-2">
+      <text class="retro-text" x="24" y="78" font-size="10" fill="#facc15">
+        🦆 En un tocón a la orilla del sendero reposa un Pato de Goma amarillo de mirada imperturbable.
+      </text>
+    </g>
+
+    <!-- EVENTO 3: COLAPSO Y CONFESIÓN DE CÓDIGO LEGACY (59.1s) -->
+    <g class="log-line-3">
+      <text class="retro-text" x="24" y="102" font-size="10" fill="#fde047">
+        💬 gNOR-mu colapsa de rodillas y le recita 800 líneas de código legacy sin tests ni comentarios...
+      </text>
+    </g>
+
+    <!-- EVENTO 4: EL SQUEAK, CURACIÓN Y ADOPCIÓN COMO SOMBRERO (61.1s) -->
+    <g class="log-line-4">
+      <text class="retro-text" x="24" y="126" font-size="10" fill="#34d399">
+        🔊 *¡SQUEAK!* La mente de gNOR-mu se aclara (+1 HP) y adopta al Pato de sombrero sagrado.
+      </text>
+    </g>
+
+    <!-- EVENTO 5: CONTINUARÁ EN LA PARTE V (63.1s) -->
+    <g class="log-line-5">
+      <text class="retro-text" x="24" y="150" font-size="10" fill="#38bdf8" letter-spacing="1">
+        <tspan class="alert-blink">▶ </tspan>CONTINUARÁ EN LA PARTE V: EL SANTUARIO DE LOS SENIORS ANCESTRALES...
+      </text>
+    </g>
+  </g>
+</svg>
