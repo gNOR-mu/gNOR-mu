@@ -1,0 +1,403 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 390" width="100%" height="100%" shape-rendering="crispEdges">
+  <defs>
+    <!-- Gradiente de fondo retro -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0b0914" />
+      <stop offset="50%" stop-color="#140f28" />
+      <stop offset="100%" stop-color="#080611" />
+    </linearGradient>
+
+    <!-- Gradiente barra de vida / cargando -->
+    <linearGradient id="hpBarGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00ffcc" />
+      <stop offset="50%" stop-color="#38ef7d" />
+      <stop offset="100%" stop-color="#11998e" />
+    </linearGradient>
+
+    <!-- Resplandor pixel -->
+    <filter id="pixelGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#00f3ff" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <style>
+    /* Tipografía pixel/retro monospace nativa de sistema */
+    .retro-text {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    /* Flotación suave del escudo y espada */
+    .crest-container {
+      transform-origin: 400px 115px;
+      animation: spawnAndFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes spawnAndFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+
+    /* Resplandor del escudo */
+    .shield-core {
+      animation: corePulse 2s ease-in-out infinite alternate;
+    }
+    @keyframes corePulse {
+      from { fill: #2b1f54; }
+      to { fill: #483285; }
+    }
+
+    /* Destello de la espada */
+    .blade-shine {
+      animation: bladeGlint 3s ease-in-out infinite;
+    }
+    @keyframes bladeGlint {
+      0%, 75% { opacity: 0.2; }
+      85% { opacity: 1; fill: #ffffff; }
+      95%, 100% { opacity: 0.2; }
+    }
+
+    /* ================= LÍNEA DE TIEMPO DEL BATTLE LOG =================
+       0.0s - 2.5s: Carga inicial de la ROM/Perfil
+       2.5s - 2.9s: Desvanecimiento de la barra de carga
+       3.0s: Aparece la ventana de BATTLE LOG
+       3.2s: LÍNEA 1: "⚠ A wild WILD_BUG [NullPointer] appeared!"
+       4.4s: LÍNEA 2: "⚡ WILD_BUG casted 'Unhandled Exception'! (-12 HP, Shield blocked 99% damage)"
+       5.8s: LÍNEA 3: "⚔ HERO counter-attacked with 'git commit --amend'!"
+       7.2s: LÍNEA 4: "💥 CRITICAL HIT! 0 Errors, 0 Warnings • BUG DEFEATED!"
+       8.5s: LÍNEA 5: "★ VICTORY! +1337 EXP • STATUS: READY FOR NEXT CHALLENGE ★" (Permanente)
+    ===================================================================== */
+
+    /* Desvanecimiento definitivo de la barra de carga tras llenarse */
+    .loading-section {
+      animation: loadingSectionFadeOut 0.4s ease-out 2.5s forwards;
+    }
+    @keyframes loadingSectionFadeOut {
+      from { opacity: 1; visibility: visible; }
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    /* Llenado de la barra de carga inicial */
+    .loading-fill {
+      animation: fillOnce 2.3s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+    }
+    @keyframes fillOnce {
+      0% { width: 0px; }
+      100% { width: 334px; }
+    }
+
+    /* Texto titilante de 'INITIALIZING...' */
+    .blink-text {
+      animation: blink 0.6s steps(2, start) infinite;
+    }
+    @keyframes blink {
+      to { visibility: hidden; }
+    }
+
+    /* Ventana del BATTLE LOG aparece tras la carga */
+    .battle-window {
+      opacity: 0;
+      visibility: hidden;
+      animation: battleWindowAppear 0.4s ease-out 2.9s forwards;
+    }
+    @keyframes battleWindowAppear {
+      to { opacity: 1; visibility: visible; }
+    }
+
+    /* Líneas de combate escalonadas (Typewriter / Turn-based timing) */
+    .log-line-1 {
+      opacity: 0;
+      animation: logFadeIn 0.3s ease-out 3.2s forwards;
+    }
+    .log-line-2 {
+      opacity: 0;
+      animation: logFadeIn 0.3s ease-out 4.4s forwards;
+    }
+    .log-line-3 {
+      opacity: 0;
+      animation: logFadeIn 0.3s ease-out 5.8s forwards;
+    }
+    .log-line-4 {
+      opacity: 0;
+      animation: logFadeIn 0.3s ease-out 7.2s forwards;
+    }
+    .log-line-5 {
+      opacity: 0;
+      animation: logFadeIn 0.3s ease-out 8.5s forwards;
+    }
+
+    @keyframes logFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Efecto de impacto leve en el escudo cuando ataca el bug (4.4s) */
+    .crest-container {
+      transform-origin: 400px 115px;
+      animation: spawnAndFloat 4s ease-in-out infinite, shieldHit 0.4s ease-out 4.4s;
+    }
+    @keyframes shieldHit {
+      0% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(-4px, 2px) scale(0.98); }
+      50% { transform: translate(4px, -2px) scale(1.02); }
+      75% { transform: translate(-2px, 0); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
+
+    /* Estrellas titilantes */
+    .star-1 { animation: twinkle 1.5s infinite alternate; }
+    .star-2 { animation: twinkle 2.3s infinite alternate 0.5s; }
+    .star-3 { animation: twinkle 1.8s infinite alternate 1s; }
+    @keyframes twinkle {
+      0% { opacity: 0.1; }
+      50% { opacity: 0.8; }
+      100% { opacity: 0.2; }
+    }
+  </style>
+
+  <!-- ================= FONDO Y MARCO RETRO ================= -->
+  <rect width="800" height="390" rx="12" fill="url(#bgGrad)" />
+
+  <!-- Marco Arcade Pixel -->
+  <rect x="10" y="10" width="780" height="370" fill="none" stroke="#231b42" stroke-width="4" rx="8" />
+  <rect x="16" y="16" width="768" height="358" fill="none" stroke="#3b2d6e" stroke-width="2" />
+  
+  <!-- Esquinas decorativas -->
+  <g fill="#00ffcc">
+    <rect x="20" y="20" width="8" height="24" />
+    <rect x="20" y="20" width="24" height="8" />
+    <rect x="756" y="20" width="24" height="8" />
+    <rect x="772" y="20" width="8" height="24" />
+    <rect x="20" y="346" width="8" height="24" />
+    <rect x="20" y="362" width="24" height="8" />
+    <rect x="756" y="362" width="24" height="8" />
+    <rect x="772" y="346" width="8" height="24" />
+  </g>
+
+  <!-- Estrellas / partículas -->
+  <g fill="#ffc837">
+    <rect class="star-1" x="120" y="55" width="4" height="4" />
+    <rect class="star-2" x="220" y="85" width="6" height="6" />
+    <rect class="star-3" x="660" y="60" width="4" height="4" />
+    <rect class="star-1" x="700" y="120" width="6" height="6" />
+    <rect class="star-2" x="140" y="160" width="5" height="5" />
+    <rect class="star-3" x="640" y="170" width="4" height="4" />
+  </g>
+  <g fill="#00f3ff">
+    <rect class="star-2" x="80" y="115" width="4" height="4" />
+    <rect class="star-3" x="270" y="45" width="4" height="4" />
+    <rect class="star-1" x="530" y="50" width="5" height="5" />
+    <rect class="star-2" x="720" y="195" width="4" height="4" />
+  </g>
+
+  <!-- ================= ENCABEZADO / HUD STATS SUPERIORES ================= -->
+  <g class="retro-text" font-size="12">
+    <!-- Vida (HP) en rojo brillante -->
+    <text x="36" y="44" fill="#ff4b72">♥ HP 999/999</text>
+    <!-- Mana (MP) en azul eléctrico / celeste místico -->
+    <text x="180" y="44" fill="#00d2ff">★ MP 999/999</text>
+    <!-- Nivel y Exp -->
+    <text x="760" y="44" text-anchor="end" fill="#ffd152">LV. 99 [EXP MAX]</text>
+  </g>
+
+  <!-- ================= ESCUDO Y ESPADA (PIXEL ART CENTRADO) ================= -->
+  <!-- Centrado en Y: 110 -->
+  <g class="crest-container">
+
+    <!-- ESCUDO PIXEL ART -->
+    <g transform="translate(340, 42)" filter="url(#pixelGlow)">
+      <!-- Marco exterior oscuro -->
+      <path d="
+        M36,0 h48 v12 h12 v18 h12 v36 h-6 v18 h-6 v12 h-6 v12 h-6 v6 h-6 v6 h-6 v6 h-6 v6 h-6 v-6 h-6 v-6 h-6 v-6 h-6 v-6 h-6 v-12 h-6 v-12 h-6 v-18 h-6 v-36 h12 v-18 h12 v-12 z
+      " fill="#131024" />
+
+      <!-- Borde metálico dorado exterior -->
+      <path d="
+        M42,6 h36 v12 h12 v18 h12 v30 h-6 v18 h-6 v12 h-6 v12 h-6 v6 h-6 v6 h-6 v6 h-6 v6 h-6 v-6 h-6 v-6 h-6 v-6 h-6 v-12 h-6 v-12 h-6 v-18 h-6 v-30 h12 v-18 h12 v-12 z
+      " fill="#fdb813" />
+
+      <!-- Sombra interior dorado -->
+      <path d="
+        M48,12 h24 v12 h12 v18 h12 v24 h-6 v18 h-6 v12 h-6 v12 h-6 v6 h-6 v-6 h-6 v-12 h-6 v-12 h-6 v-18 h-6 v-24 h12 v-18 h12 v-12 z
+      " fill="#b9770e" />
+
+      <!-- Fondo interno del escudo -->
+      <path class="shield-core" d="
+        M48,18 h24 v18 h12 v18 h6 v18 h-6 v12 h-6 v12 h-6 v6 h-6 v6 h-6 v-6 h-6 v-6 h-6 v-12 h-6 v-12 h-6 v-18 h6 v-18 h12 v-18 z
+      " />
+
+      <!-- Cruz central cian -->
+      <rect x="54" y="30" width="12" height="42" fill="#00ffff" />
+      <rect x="36" y="42" width="48" height="12" fill="#00ffff" />
+      <rect x="57" y="33" width="6" height="36" fill="#ffffff" />
+      <rect x="39" y="45" width="42" height="6" fill="#ffffff" />
+
+      <!-- Remaches esquineros -->
+      <rect x="42" y="18" width="6" height="6" fill="#ffe082" />
+      <rect x="72" y="18" width="6" height="6" fill="#ffe082" />
+      <rect x="18" y="48" width="6" height="6" fill="#ffe082" />
+      <rect x="96" y="48" width="6" height="6" fill="#ffe082" />
+    </g>
+
+    <!-- ESPADA PIXEL ART -->
+    <g transform="translate(400, 117) rotate(-45) translate(-12, -78)">
+      <!-- Hoja: Punta -->
+      <rect x="9" y="0" width="6" height="6" fill="#e0f7fa" />
+      <rect x="6" y="6" width="12" height="6" fill="#80deea" />
+      <rect x="9" y="6" width="6" height="6" fill="#ffffff" />
+
+      <!-- Hoja: Cuerpo -->
+      <rect x="6" y="12" width="12" height="78" fill="#b2ebf2" />
+      <rect x="3" y="12" width="3" height="78" fill="#4dd0e1" />
+      <rect x="18" y="12" width="3" height="78" fill="#0097a7" />
+      <rect class="blade-shine" x="9" y="12" width="6" height="78" fill="#ffffff" />
+
+      <!-- Gavilanes / Guarda -->
+      <rect x="-15" y="90" width="54" height="6" fill="#1b120c" />
+      <rect x="-12" y="93" width="48" height="6" fill="#fdb813" />
+      <rect x="-18" y="87" width="9" height="15" fill="#f59e0b" />
+      <rect x="33" y="87" width="9" height="15" fill="#f59e0b" />
+      <rect x="-15" y="90" width="3" height="9" fill="#ff0055" />
+      <rect x="36" y="90" width="3" height="9" fill="#ff0055" />
+      <rect x="6" y="90" width="12" height="12" fill="#d97706" />
+      <rect x="9" y="93" width="6" height="6" fill="#00ffff" />
+
+      <!-- Mango -->
+      <rect x="6" y="102" width="12" height="24" fill="#6d4c41" />
+      <rect x="9" y="105" width="6" height="6" fill="#8d6e63" />
+      <rect x="9" y="114" width="6" height="6" fill="#8d6e63" />
+
+      <!-- Pomo -->
+      <rect x="3" y="126" width="18" height="6" fill="#d97706" />
+      <rect x="6" y="132" width="12" height="9" fill="#fdb813" />
+      <rect x="9" y="135" width="6" height="3" fill="#ff0055" />
+    </g>
+
+  </g>
+
+  <!-- ================= FASE 1: BARRA DE CARGA ================= -->
+  <g class="loading-section">
+    <!-- Texto de estado -->
+    <g class="retro-text" text-anchor="middle">
+      <text x="400" y="244" font-size="13" fill="#00ffcc" letter-spacing="2">
+        <tspan class="blink-text">▶ </tspan>INITIALIZING PROFILE<tspan class="blink-text">... ◀</tspan>
+      </text>
+    </g>
+
+    <!-- Contenedor exterior Barra de Carga -->
+    <g transform="translate(225, 262)">
+      <rect x="-3" y="-3" width="356" height="24" fill="#000000" />
+      <rect x="-2" y="-2" width="354" height="22" fill="#3a3852" />
+      <rect x="0" y="0" width="350" height="18" fill="#1a1829" />
+      <rect x="2" y="2" width="346" height="2" fill="#58527a" />
+      <rect x="2" y="14" width="346" height="2" fill="#0e0d17" />
+
+      <!-- Barra animada con máscara -->
+      <g transform="translate(8, 3)">
+        <rect x="0" y="0" width="334" height="12" fill="#0a0814" />
+        
+        <g clip-path="url(#barClip)">
+          <clipPath id="barClip">
+            <rect class="loading-fill" x="0" y="0" width="334" height="12" />
+          </clipPath>
+          
+          <rect x="0" y="0" width="334" height="12" fill="url(#hpBarGrad)" clip-path="url(#barClip)" />
+
+          <!-- Rejilla pixel arcade -->
+          <g fill="#0b0914" opacity="0.4" clip-path="url(#barClip)">
+            <rect x="12" y="0" width="2" height="12" /><rect x="24" y="0" width="2" height="12" />
+            <rect x="36" y="0" width="2" height="12" /><rect x="48" y="0" width="2" height="12" />
+            <rect x="60" y="0" width="2" height="12" /><rect x="72" y="0" width="2" height="12" />
+            <rect x="84" y="0" width="2" height="12" /><rect x="96" y="0" width="2" height="12" />
+            <rect x="108" y="0" width="2" height="12" /><rect x="120" y="0" width="2" height="12" />
+            <rect x="132" y="0" width="2" height="12" /><rect x="144" y="0" width="2" height="12" />
+            <rect x="156" y="0" width="2" height="12" /><rect x="168" y="0" width="2" height="12" />
+            <rect x="180" y="0" width="2" height="12" /><rect x="192" y="0" width="2" height="12" />
+            <rect x="204" y="0" width="2" height="12" /><rect x="216" y="0" width="2" height="12" />
+            <rect x="228" y="0" width="2" height="12" /><rect x="240" y="0" width="2" height="12" />
+            <rect x="252" y="0" width="2" height="12" /><rect x="264" y="0" width="2" height="12" />
+            <rect x="276" y="0" width="2" height="12" /><rect x="288" y="0" width="2" height="12" />
+            <rect x="300" y="0" width="2" height="12" /><rect x="312" y="0" width="2" height="12" />
+            <rect x="324" y="0" width="2" height="12" />
+          </g>
+          <rect x="0" y="1" width="334" height="2" fill="#ffffff" opacity="0.6" clip-path="url(#barClip)" />
+        </g>
+      </g>
+    </g>
+
+    <text class="retro-text" x="400" y="316" text-anchor="middle" font-size="11" fill="#68638c" letter-spacing="2">
+      READING CARTRIDGE ROM DATA...
+    </text>
+  </g>
+
+  <!-- ================= FASE 2: BATTLE LOG POR TURNOS (RETRO RPG) ================= -->
+  <g class="battle-window">
+
+    <!-- Marco de diálogo / Battle Box (Centrado: x=30, ancho=740, alto=165) -->
+    <g transform="translate(30, 205)">
+      <!-- Fondo translúcido del cuadro de batalla -->
+      <rect x="0" y="0" width="740" height="165" fill="#090714" opacity="0.96" />
+      <!-- Borde pixelado doble arcade -->
+      <rect x="0" y="0" width="740" height="165" fill="none" stroke="#fdb813" stroke-width="2" />
+      <rect x="4" y="4" width="732" height="157" fill="none" stroke="#2e264f" stroke-width="1.5" />
+
+      <!-- Esquinas decorativas del diálogo -->
+      <rect x="0" y="0" width="8" height="8" fill="#ffe082" />
+      <rect x="732" y="0" width="8" height="8" fill="#ffe082" />
+      <rect x="0" y="157" width="8" height="8" fill="#ffe082" />
+      <rect x="732" y="157" width="8" height="8" fill="#ffe082" />
+
+      <!-- ENCABEZADO DEL DIÁLOGO / COMBAT LOG -->
+      <g class="log-line-1">
+        <rect x="14" y="10" width="712" height="20" fill="#1b1433" />
+        <text class="retro-text" x="26" y="24" font-size="10" fill="#ffd152" letter-spacing="1">
+          ⚔ TURN-BASED COMBAT LOG • ENCOUNTER #0404
+        </text>
+        <text class="retro-text" x="712" y="24" text-anchor="end" font-size="9" fill="#00ffcc">
+          [AUTO-BATTLE]
+        </text>
+      </g>
+
+      <!-- PASO 1: APARICIÓN DEL BUG (3.2s) -->
+      <g class="log-line-1">
+        <text class="retro-text" x="24" y="54" font-size="10" fill="#ff5376">
+          ⚠ A wild WILD_BUG [NullPointer] ambushed the hero!
+        </text>
+      </g>
+
+      <!-- PASO 2: EL BUG ATACA PRIMERO (4.4s) -->
+      <g class="log-line-2">
+        <text class="retro-text" x="24" y="78" font-size="10" fill="#ff8552">
+          ⚡ WILD_BUG casted 'Unhandled Exception'!
+        </text>
+        <text class="retro-text" x="380" y="78" font-size="9" fill="#a599c2">
+          (Shield blocked 99% damage! -12 HP)
+        </text>
+      </g>
+
+      <!-- PASO 3: CONTRAATAQUE DEL JUGADOR / HÉROE (5.8s) -->
+      <g class="log-line-3">
+        <text class="retro-text" x="24" y="102" font-size="10" fill="#00ffff">
+          🗡 HERO counter-attacked with 'git commit -m "fix bugs"'!
+        </text>
+      </g>
+
+      <!-- PASO 4: GOLPE CRÍTICO Y DERROTA DEL BUG (7.2s) -->
+      <g class="log-line-4">
+        <text class="retro-text" x="24" y="126" font-size="10" fill="#38ef7d">
+          💥 CRITICAL HIT! 0 Errors, 0 Warnings • BUG DEFEATED!
+        </text>
+      </g>
+
+      <!-- PASO 5: VICTORIA Y EXP FINAL (8.5s en adelante, permanente) -->
+      <g class="log-line-5">
+        <text class="retro-text" x="24" y="150" font-size="10" fill="#ffd152" letter-spacing="1">
+          ★ VICTORY! +1337 EXP • STATUS: READY FOR NEXT CHALLENGE ★
+        </text>
+      </g>
+
+    </g>
+
+  </g>
+</svg>
