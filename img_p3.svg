@@ -34,22 +34,22 @@
       user-select: none;
     }
 
-    /* ================= FASE 1: ESPERA Y PREPARACIÓN (0.0s - 21.0s) =================
-       Se muestra mientras transcurre el Capítulo II (17.0s) + 4s de margen = 21.0s.
-       Contiene la barra de carga (que se completa en 20.5s) y la cita de William Faulkner.
-       A los 21.0s se desvanece de forma definitiva para dar paso a la escena activa.
+    /* ================= FASE 1: ESPERA Y PREPARACIÓN (0.0s - 29.5s) =================
+       Se muestra mientras transcurre el Capítulo II (26.5s) + 3.0s de margen = 29.5s.
+       Contiene la barra de carga (que se completa en 29.0s) y la cita de William Faulkner.
+       A los 29.5s se desvanece de forma definitiva para dar paso a la escena activa.
     ================================================================================ */
     .waiting-phase {
-      animation: waitingFadeOut 0.5s ease-out 21.0s forwards;
+      animation: waitingFadeOut 0.5s ease-out 29.5s forwards;
     }
     @keyframes waitingFadeOut {
       from { opacity: 1; visibility: visible; }
       to { opacity: 0; visibility: hidden; display: none; }
     }
 
-    /* Barra de sincronización que se llena a lo largo de los 20.5s */
+    /* Barra de sincronización que se llena a lo largo de los 29.0s */
     .sync-fill {
-      animation: syncFill 20.5s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+      animation: syncFill 29.0s cubic-bezier(0.2, 0, 0.2, 1) forwards;
     }
     @keyframes syncFill {
       0% { width: 0px; }
@@ -64,20 +64,20 @@
       to { opacity: 1; fill: #ffffff; }
     }
 
-    /* ================= FASE 2: ESCENA ACTIVA (21.0s en adelante) ================= */
+    /* ================= FASE 2: ESCENA ACTIVA (29.5s en adelante) ================= */
     .chapter-scene {
       opacity: 0;
       visibility: hidden;
-      animation: chapterSceneAppear 0.5s ease-out 21.0s forwards;
+      animation: chapterSceneAppear 0.5s ease-out 29.5s forwards;
     }
     @keyframes chapterSceneAppear {
       to { opacity: 1; visibility: visible; }
     }
 
-    /* Stats del HUD superior: aparecen tras finalizar la barra de carga (21.0s) */
+    /* Stats del HUD superior: aparecen tras finalizar la barra de carga (29.5s) */
     .hud-appear {
       opacity: 0;
-      animation: hudFadeIn 0.5s ease-out 21.0s forwards;
+      animation: hudFadeIn 0.5s ease-out 29.5s forwards;
     }
     @keyframes hudFadeIn {
       from { opacity: 0; transform: translateY(-4px); }
@@ -93,9 +93,9 @@
       50% { transform: translateY(-3px); }
     }
 
-    /* Desvanecimiento del Cofre Maldito EXACTAMENTE EN SU LUGAR (a los 21.8s = tras el primer diálogo) */
+    /* Desvanecimiento del Cofre Maldito EXACTAMENTE EN SU LUGAR (a los 30.3s = tras el primer diálogo a los 30.0s) */
     .chest-vanish {
-      animation: chestDissolveInPlace 1.2s ease-out 21.8s forwards;
+      animation: chestDissolveInPlace 1.2s ease-out 30.3s forwards;
     }
     @keyframes chestDissolveInPlace {
       0% { opacity: 1; }
@@ -104,19 +104,19 @@
     }
 
     /* Partículas de disolución y ceniza del cofre en su lugar */
-    .dissolve-particle-1 { animation: dissolveParticle 1.4s ease-out 21.8s forwards; }
-    .dissolve-particle-2 { animation: dissolveParticle 1.6s ease-out 21.9s forwards; }
-    .dissolve-particle-3 { animation: dissolveParticle 1.8s ease-out 22.0s forwards; }
+    .dissolve-particle-1 { animation: dissolveParticle 1.4s ease-out 30.3s forwards; }
+    .dissolve-particle-2 { animation: dissolveParticle 1.6s ease-out 30.4s forwards; }
+    .dissolve-particle-3 { animation: dissolveParticle 1.8s ease-out 30.5s forwards; }
     @keyframes dissolveParticle {
       0% { opacity: 0; }
       50% { opacity: 0.9; }
       100% { opacity: 0; visibility: hidden; }
     }
 
-    /* Aparición de la Gran Puerta hacia el exterior de día (a los 29.0s con el diálogo 4) */
+    /* Aparición de la Gran Puerta hacia el exterior de día (a los 37.5s con el diálogo 4) */
     .daylight-door {
       opacity: 0;
-      animation: doorMaterialize 1.0s cubic-bezier(0.2, 0.8, 0.3, 1) 29.0s forwards;
+      animation: doorMaterialize 1.0s cubic-bezier(0.2, 0.8, 0.3, 1) 37.5s forwards;
     }
     @keyframes doorMaterialize {
       0% { opacity: 0; }
@@ -132,10 +132,10 @@
       100% { opacity: 0.95; }
     }
 
-    /* Aura de drenaje de stats sobre el héroe (a los 24.0s al activarse el segundo diálogo del debuff) */
+    /* Aura de drenaje de stats sobre el héroe (a los 32.5s al activarse el segundo diálogo del debuff) */
     .drain-aura {
       opacity: 0;
-      animation: drainAuraPulse 1.8s ease-in-out 24.0s infinite alternate;
+      animation: drainAuraPulse 1.8s ease-in-out 32.5s infinite alternate;
     }
     @keyframes drainAuraPulse {
       0% { opacity: 0.15; fill: #ef4444; }
@@ -151,9 +151,9 @@
       100% { fill: #c084fc; }
     }
 
-    /* Marcha del héroe: recién se empieza a mover hacia la puerta abierta (a los 30.5s tras abrirse la puerta a los 29.0s) */
+    /* Marcha del héroe: recién se empieza a mover hacia la puerta abierta (a los 39.0s tras abrirse la puerta a los 37.5s) */
     .hero-march-anim {
-      animation: heroMarchToDoor 3.0s cubic-bezier(0.3, 0.1, 0.3, 1) 30.5s forwards;
+      animation: heroMarchToDoor 3.0s cubic-bezier(0.3, 0.1, 0.3, 1) 39.0s forwards;
     }
     @keyframes heroMarchToDoor {
       0% { transform: translateX(0); }
@@ -162,33 +162,33 @@
 
     /* Pasos del héroe mientras camina hacia la puerta */
     .hero-walk-step {
-      animation: walkStepBob 0.28s ease-in-out 30.5s 11 alternate;
+      animation: walkStepBob 0.28s ease-in-out 39.0s 11 alternate;
     }
     @keyframes walkStepBob {
       0% { transform: translateY(0); }
       100% { transform: translateY(-4px); }
     }
 
-    /* Diálogos con 2.5 segundos cada uno para una lectura fluida y dinámica */
+    /* Diálogos con 2.5 segundos cada uno para una lectura fluida y dinámica tras 29.5s */
     .log-line-1 {
       opacity: 0;
-      animation: logFadeIn 0.35s ease-out 21.5s forwards;
+      animation: logFadeIn 0.35s ease-out 30.0s forwards;
     }
     .log-line-2 {
       opacity: 0;
-      animation: logFadeIn 0.35s ease-out 24.0s forwards;
+      animation: logFadeIn 0.35s ease-out 32.5s forwards;
     }
     .log-line-3 {
       opacity: 0;
-      animation: logFadeIn 0.35s ease-out 26.5s forwards;
+      animation: logFadeIn 0.35s ease-out 35.0s forwards;
     }
     .log-line-4 {
       opacity: 0;
-      animation: logFadeIn 0.35s ease-out 29.0s forwards;
+      animation: logFadeIn 0.35s ease-out 37.5s forwards;
     }
     .log-line-5 {
       opacity: 0;
-      animation: logFadeIn 0.35s ease-out 31.5s forwards;
+      animation: logFadeIn 0.35s ease-out 40.0s forwards;
     }
     @keyframes logFadeIn {
       from { opacity: 0; }
@@ -240,28 +240,28 @@
   <!-- ================= ENCABEZADO / HUD STATS ================= -->
   <g class="retro-text">
     <g class="hud-appear">
-      <!-- VIDA (HP): Heredado en 987/999 de la Pt. 2. A los 24.0s (al desvanecer el cofre y evento 2), se drena a 100/999 -->
+      <!-- VIDA (HP): Heredado en 987/999 de la Pt. 2. A los 32.5s (al desvanecer el cofre y evento 2), se drena a 100/999 -->
       <text x="36" y="42" font-size="12" fill="#ff4b72">
         ♥ HP 987/999
-        <set attributeName="visibility" to="hidden" begin="24.0s" fill="freeze" />
+        <set attributeName="visibility" to="hidden" begin="32.5s" fill="freeze" />
       </text>
       <text x="36" y="42" font-size="12" fill="#ef4444" visibility="hidden">
         ♥ HP 100/999
-        <set attributeName="visibility" to="visible" begin="24.0s" fill="freeze" />
-        <set attributeName="fill" to="#ffffff" begin="24.0s" dur="0.2s" />
-        <set attributeName="fill" to="#ef4444" begin="24.2s" dur="0.4s" />
+        <set attributeName="visibility" to="visible" begin="32.5s" fill="freeze" />
+        <set attributeName="fill" to="#ffffff" begin="32.5s" dur="0.2s" />
+        <set attributeName="fill" to="#ef4444" begin="32.7s" dur="0.4s" />
       </text>
 
-      <!-- MANÁ (MP): Heredado en 899/999 de la Pt. 2. A los 24.0s se extingue a 000/999 -->
+      <!-- MANÁ (MP): Heredado en 899/999 de la Pt. 2. A los 32.5s se extingue a 000/999 -->
       <text x="180" y="42" font-size="12" fill="#00d2ff">
         ★ MP 899/999
-        <set attributeName="visibility" to="hidden" begin="24.0s" fill="freeze" />
+        <set attributeName="visibility" to="hidden" begin="32.5s" fill="freeze" />
       </text>
       <text x="180" y="42" font-size="12" fill="#64748b" visibility="hidden">
         ★ MP 000/999
-        <set attributeName="visibility" to="visible" begin="24.0s" fill="freeze" />
-        <set attributeName="fill" to="#ffffff" begin="24.0s" dur="0.2s" />
-        <set attributeName="fill" to="#94a3b8" begin="24.2s" dur="0.4s" />
+        <set attributeName="visibility" to="visible" begin="32.5s" fill="freeze" />
+        <set attributeName="fill" to="#ffffff" begin="32.5s" dur="0.2s" />
+        <set attributeName="fill" to="#94a3b8" begin="32.7s" dur="0.4s" />
       </text>
 
       <!-- Nombre del héroe / cuenta debajo del HP -->
@@ -598,7 +598,7 @@
     <!-- EVENTO 5: REMATE / CONTINUARÁ -->
     <g class="log-line-5">
       <text class="retro-text" x="24" y="150" font-size="10" fill="#f43f5e" letter-spacing="1">
-        <tspan class="alert-blink">▶ </tspan>EN BUSCA DEL CONOCIMIENTO ANCESTRAL: LOS SABIOS (SENIORS)...
+        <tspan class="alert-blink">▶ </tspan>CONTINUARÁ EN LA PARTE IV: EN BUSCA DE LOS SENIORS ANCESTRALES...
       </text>
     </g>
   </g>
