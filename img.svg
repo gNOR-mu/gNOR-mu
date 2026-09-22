@@ -31,12 +31,21 @@
     /* Flotación suave del escudo y espada */
     .crest-container {
       transform-origin: 400px 115px;
-      animation: spawnAndFloat 4s ease-in-out infinite;
+      animation: spawnAndFloat 4s ease-in-out infinite, shieldHitOnce 0.4s ease-out 4.4s;
     }
 
     @keyframes spawnAndFloat {
       0%, 100% { transform: translateY(0px); }
       50% { transform: translateY(-6px); }
+    }
+
+    /* Impacto en el escudo al recibir el golpe del bug a los 4.4s */
+    @keyframes shieldHitOnce {
+      0% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(-4px, 2px) scale(0.98); }
+      50% { transform: translate(4px, -2px) scale(1.02); }
+      75% { transform: translate(-2px, 0); }
+      100% { transform: translate(0, 0) scale(1); }
     }
 
     /* Resplandor del escudo */
@@ -58,18 +67,19 @@
       95%, 100% { opacity: 0.2; }
     }
 
-    /* ================= LÍNEA DE TIEMPO DEL BATTLE LOG =================
+    /* ================= LÍNEA DE TIEMPO DEL CAPÍTULO I (ESTADO PERMANENTE) =================
        0.0s - 2.5s: Carga inicial de la ROM/Perfil
-       2.5s - 2.9s: Desvanecimiento de la barra de carga
-       3.0s: Aparece la ventana de BATTLE LOG
-       3.2s: LÍNEA 1: "⚠ A wild WILD_BUG [NullPointer] appeared!"
-       4.4s: LÍNEA 2: "⚡ WILD_BUG casted 'Unhandled Exception'! (-12 HP, Shield blocked 99% damage)"
-       5.8s: LÍNEA 3: "⚔ HERO counter-attacked with 'git commit --amend'!"
-       7.2s: LÍNEA 4: "💥 CRITICAL HIT! 0 Errors, 0 Warnings • BUG DEFEATED!"
-       8.5s: LÍNEA 5: "★ VICTORY! +1337 EXP • STATUS: READY FOR NEXT CHALLENGE ★" (Permanente)
-    ===================================================================== */
+       2.5s - 2.9s: Desvanecimiento de la barra
+       2.9s: Aparece el BATTLE LOG
+       3.2s: LÍNEA 1: "⚠ ¡Un BUG salvaje [NullPointerException] emboscó al héroe!"
+       4.4s: LÍNEA 2: "⚡ ¡El BUG lanzó 'Excepción No Controlada'!" (-12 HP)
+       5.8s: LÍNEA 3: "🗡 ¡El HÉROE contraatacó con 'git commit'!" (-100 MP)
+       7.2s: LÍNEA 4: "💥 ¡GOLPE CRÍTICO! ¡BUG DERROTADO!"
+       8.5s: LÍNEA 5: "★ ¡VICTORIA! +1337 EXP..."
+       ESTADO FINAL: PERMANECE EN PANTALLA DE FORMA INDEFINIDA
+    ======================================================================================== */
 
-    /* Desvanecimiento definitivo de la barra de carga tras llenarse */
+    /* Desvanecimiento de la barra de carga tras completarse */
     .loading-section {
       animation: loadingSectionFadeOut 0.4s ease-out 2.5s forwards;
     }
@@ -78,7 +88,7 @@
       to { opacity: 0; visibility: hidden; }
     }
 
-    /* Llenado de la barra de carga inicial */
+    /* Llenado de la barra de carga */
     .loading-fill {
       animation: fillOnce 2.3s cubic-bezier(0.2, 0, 0.2, 1) forwards;
     }
@@ -87,7 +97,7 @@
       100% { width: 334px; }
     }
 
-    /* Texto titilante de 'INITIALIZING...' */
+    /* Texto titilante de 'INICIALIZANDO...' */
     .blink-text {
       animation: blink 0.6s steps(2, start) infinite;
     }
@@ -95,7 +105,7 @@
       to { visibility: hidden; }
     }
 
-    /* Ventana del BATTLE LOG aparece tras la carga */
+    /* Ventana del BATTLE LOG (Aparece a los 2.9s y queda permanente) */
     .battle-window {
       opacity: 0;
       visibility: hidden;
@@ -105,44 +115,41 @@
       to { opacity: 1; visibility: visible; }
     }
 
-    /* Líneas de combate escalonadas (Typewriter / Turn-based timing) */
+    /* Aparición escalonada de cada línea del log (permanentes con forwards) */
     .log-line-1 {
       opacity: 0;
-      animation: logFadeIn 0.3s ease-out 3.2s forwards;
+      animation: logLineFadeIn 0.3s ease-out 3.2s forwards;
     }
     .log-line-2 {
       opacity: 0;
-      animation: logFadeIn 0.3s ease-out 4.4s forwards;
+      animation: logLineFadeIn 0.3s ease-out 4.4s forwards;
     }
     .log-line-3 {
       opacity: 0;
-      animation: logFadeIn 0.3s ease-out 5.8s forwards;
+      animation: logLineFadeIn 0.3s ease-out 5.8s forwards;
     }
     .log-line-4 {
       opacity: 0;
-      animation: logFadeIn 0.3s ease-out 7.2s forwards;
+      animation: logLineFadeIn 0.3s ease-out 7.2s forwards;
     }
     .log-line-5 {
       opacity: 0;
-      animation: logFadeIn 0.3s ease-out 8.5s forwards;
+      animation: logLineFadeIn 0.3s ease-out 8.5s forwards;
     }
 
-    @keyframes logFadeIn {
+    @keyframes logLineFadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
 
-    /* Efecto de impacto leve en el escudo cuando ataca el bug (4.4s) */
-    .crest-container {
-      transform-origin: 400px 115px;
-      animation: spawnAndFloat 4s ease-in-out infinite, shieldHit 0.4s ease-out 4.4s;
+    /* Aparición de las stats superiores tras terminar la barra de carga (2.5s) */
+    .hud-appear {
+      opacity: 0;
+      animation: hudFadeIn 0.4s ease-out 2.5s forwards;
     }
-    @keyframes shieldHit {
-      0% { transform: translate(0, 0) scale(1); }
-      25% { transform: translate(-4px, 2px) scale(0.98); }
-      50% { transform: translate(4px, -2px) scale(1.02); }
-      75% { transform: translate(-2px, 0); }
-      100% { transform: translate(0, 0) scale(1); }
+    @keyframes hudFadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Estrellas titilantes */
@@ -192,13 +199,39 @@
   </g>
 
   <!-- ================= ENCABEZADO / HUD STATS SUPERIORES ================= -->
-  <g class="retro-text" font-size="12">
-    <!-- Vida (HP) en rojo brillante -->
-    <text x="36" y="44" fill="#ff4b72">♥ HP 999/999</text>
-    <!-- Mana (MP) en azul eléctrico / celeste místico -->
-    <text x="180" y="44" fill="#00d2ff">★ MP 999/999</text>
-    <!-- Nivel y Exp -->
-    <text x="760" y="44" text-anchor="end" fill="#ffd152">LV. 99 [EXP MAX]</text>
+  <g class="retro-text">
+    <!-- Stats del héroe: Aparecen al finalizar la barra de carga (2.5s) -->
+    <g class="hud-appear">
+      <!-- VIDA (HP): Inicialmente 999/999, a los 4.4s se oculta y emerge 987/999 con destello -->
+      <text x="36" y="42" font-size="12" fill="#ff4b72">
+        ♥ HP 999/999
+        <set attributeName="visibility" to="hidden" begin="4.4s" fill="freeze" />
+      </text>
+      <text x="36" y="42" font-size="12" fill="#ff4b72" visibility="hidden">
+        ♥ HP 987/999
+        <set attributeName="visibility" to="visible" begin="4.4s" fill="freeze" />
+        <set attributeName="fill" to="#ffffff" begin="4.4s" dur="0.2s" />
+        <set attributeName="fill" to="#ff0055" begin="4.6s" dur="0.4s" />
+      </text>
+
+      <!-- MANÁ (MP): Inicialmente 999/999, a los 5.8s se oculta y emerge 899/999 con destello -->
+      <text x="180" y="42" font-size="12" fill="#00d2ff">
+        ★ MP 999/999
+        <set attributeName="visibility" to="hidden" begin="5.8s" fill="freeze" />
+      </text>
+      <text x="180" y="42" font-size="12" fill="#00d2ff" visibility="hidden">
+        ★ MP 899/999
+        <set attributeName="visibility" to="visible" begin="5.8s" fill="freeze" />
+        <set attributeName="fill" to="#ffffff" begin="5.8s" dur="0.2s" />
+        <set attributeName="fill" to="#38ef7d" begin="6.0s" dur="0.4s" />
+      </text>
+
+      <!-- Nombre del jugador / cuenta (Debajo del HP: x=36, y=60) -->
+      <text x="36" y="60" font-size="11" fill="#00ffcc">⚔ gNOR-mu</text>
+    </g>
+
+    <!-- Título del capítulo en sintonía con el Capítulo II -->
+    <text x="760" y="44" text-anchor="end" font-size="12" fill="#ffd152">CAPÍTULO I: EL ATAQUE</text>
   </g>
 
   <!-- ================= ESCUDO Y ESPADA (PIXEL ART CENTRADO) ================= -->
@@ -281,7 +314,7 @@
     <!-- Texto de estado -->
     <g class="retro-text" text-anchor="middle">
       <text x="400" y="244" font-size="13" fill="#00ffcc" letter-spacing="2">
-        <tspan class="blink-text">▶ </tspan>INITIALIZING PROFILE<tspan class="blink-text">... ◀</tspan>
+        <tspan class="blink-text">▶ </tspan>INICIALIZANDO PERFIL<tspan class="blink-text">... ◀</tspan>
       </text>
     </g>
 
@@ -327,7 +360,7 @@
     </g>
 
     <text class="retro-text" x="400" y="316" text-anchor="middle" font-size="11" fill="#68638c" letter-spacing="2">
-      READING CARTRIDGE ROM DATA...
+      LEYENDO DATOS DE LA MEMORIA ROM...
     </text>
   </g>
 
@@ -352,48 +385,51 @@
       <g class="log-line-1">
         <rect x="14" y="10" width="712" height="20" fill="#1b1433" />
         <text class="retro-text" x="26" y="24" font-size="10" fill="#ffd152" letter-spacing="1">
-          ⚔ TURN-BASED COMBAT LOG • ENCOUNTER #0404
+          ⚔ REGISTRO DE BATALLA POR TURNOS • ENCUENTRO #0404
         </text>
         <text class="retro-text" x="712" y="24" text-anchor="end" font-size="9" fill="#00ffcc">
-          [AUTO-BATTLE]
+          [BATALLA-AUTO]
         </text>
       </g>
 
       <!-- PASO 1: APARICIÓN DEL BUG (3.2s) -->
       <g class="log-line-1">
         <text class="retro-text" x="24" y="54" font-size="10" fill="#ff5376">
-          ⚠ A wild WILD_BUG [NullPointer] ambushed the hero!
+          ⚠ ¡Un BUG salvaje [NullPointerException] emboscó al héroe!
         </text>
       </g>
 
       <!-- PASO 2: EL BUG ATACA PRIMERO (4.4s) -->
       <g class="log-line-2">
         <text class="retro-text" x="24" y="78" font-size="10" fill="#ff8552">
-          ⚡ WILD_BUG casted 'Unhandled Exception'!
+          ⚡ ¡El BUG lanzó 'Excepción No Controlada'!
         </text>
         <text class="retro-text" x="380" y="78" font-size="9" fill="#a599c2">
-          (Shield blocked 99% damage! -12 HP)
+          (¡El escudo bloqueó 99% de daño! -12 HP)
         </text>
       </g>
 
       <!-- PASO 3: CONTRAATAQUE DEL JUGADOR / HÉROE (5.8s) -->
       <g class="log-line-3">
         <text class="retro-text" x="24" y="102" font-size="10" fill="#00ffff">
-          🗡 HERO counter-attacked with 'git commit -m "fix bugs"'!
+          🗡 ¡gNOR-mu contraatacó con 'git commit -m "solucionar bugs"'!
+        </text>
+        <text class="retro-text" x="510" y="102" font-size="9" fill="#70d6ff">
+          (-100 MP)
         </text>
       </g>
 
       <!-- PASO 4: GOLPE CRÍTICO Y DERROTA DEL BUG (7.2s) -->
       <g class="log-line-4">
         <text class="retro-text" x="24" y="126" font-size="10" fill="#38ef7d">
-          💥 CRITICAL HIT! 0 Errors, 0 Warnings • BUG DEFEATED!
+          💥 ¡GOLPE CRÍTICO! 0 Errores, 0 Advertencias • ¡BUG DERROTADO!
         </text>
       </g>
 
       <!-- PASO 5: VICTORIA Y EXP FINAL (8.5s en adelante, permanente) -->
       <g class="log-line-5">
         <text class="retro-text" x="24" y="150" font-size="10" fill="#ffd152" letter-spacing="1">
-          ★ VICTORY! +1337 EXP • STATUS: READY FOR NEXT CHALLENGE ★
+          ★ ¡VICTORIA! +1337 EXP • ESTADO: LISTO PARA EL SIGUIENTE DESAFÍO ★
         </text>
       </g>
 
