@@ -1,0 +1,604 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 390" width="100%" height="100%" shape-rendering="crispEdges">
+  <defs>
+    <!-- Gradiente de fondo general de consola cósmica -->
+    <linearGradient id="bgGradP6" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#030208" />
+      <stop offset="50%" stop-color="#080514" />
+      <stop offset="100%" stop-color="#020106" />
+    </linearGradient>
+
+    <!-- Gradiente del amanecer triunfal (Viñeta 2) -->
+    <linearGradient id="sunriseSkyP6" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b" />
+      <stop offset="35%" stop-color="#431407" />
+      <stop offset="65%" stop-color="#b45309" />
+      <stop offset="85%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#fef08a" />
+    </linearGradient>
+
+    <!-- Gradiente pradera del amanecer (Viñeta 2) -->
+    <linearGradient id="sunriseMeadowP6" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#065f46" />
+      <stop offset="50%" stop-color="#047857" />
+      <stop offset="100%" stop-color="#064e3b" />
+    </linearGradient>
+
+    <!-- Resplandor verde Matrix / CI-CD Verde -->
+    <filter id="matrixGlowP6" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#22c55e" flood-opacity="0.9"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="12" flood-color="#10b981" flood-opacity="0.6"/>
+    </filter>
+
+    <!-- Resplandor dorado de buff divino -->
+    <filter id="goldGlowP6" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#fbbf24" flood-opacity="0.95"/>
+    </filter>
+
+    <!-- ClipPaths independientes para viñetas -->
+    <clipPath id="clipV1">
+      <rect x="0" y="0" width="370" height="152" rx="6" />
+    </clipPath>
+    <clipPath id="clipV2">
+      <rect x="0" y="0" width="370" height="152" rx="6" />
+    </clipPath>
+  </defs>
+
+  <style>
+    .retro-text {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    /* ================= FASE 1: ALERTA CRÍTICA Y APAGÓN (89.5s - 94.5s) =================
+       Empieza exactamente al expirar el contador de la intranet en la Parte V (89.5s).
+       Dura exactamente 5.0 segundos.
+    ==================================================================================== */
+    .waiting-phase {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      animation: waitingPhaseAppear 0.4s ease-out 89.5s forwards, waitingFadeOut 0.4s ease-out 94.5s forwards;
+    }
+    @keyframes waitingPhaseAppear {
+      to { opacity: 1; visibility: visible; pointer-events: auto; }
+    }
+    @keyframes waitingFadeOut {
+      0% { opacity: 1; visibility: visible; }
+      100% { opacity: 0; visibility: hidden; pointer-events: none; }
+    }
+
+    .sync-fill {
+      animation: syncFill 4.8s cubic-bezier(0.2, 0, 0.2, 1) 89.5s forwards;
+    }
+    @keyframes syncFill {
+      0% { width: 0px; }
+      100% { width: 450px; }
+    }
+
+    .cursor-blink {
+      animation: cursorBlinkAnim 0.5s steps(2, start) infinite;
+    }
+    @keyframes cursorBlinkAnim {
+      to { visibility: hidden; }
+    }
+
+    .alarm-blink-fast {
+      animation: alertBlinkFast 0.4s steps(2, start) infinite;
+    }
+    @keyframes alertBlinkFast {
+      to { visibility: hidden; }
+    }
+
+    /* ================= FASE 2: RESOLUCIÓN Y DÍPTICO (94.5s en adelante) ================= */
+    .chapter-scene {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      animation: sceneReveal 0.6s ease-out 94.5s forwards;
+    }
+    @keyframes sceneReveal {
+      to { opacity: 1; visibility: visible; pointer-events: auto; }
+    }
+
+    /* Resplandor de marco de viñeta 1 (Verde Terminal) */
+    .border-matrix-glow {
+      animation: matrixBorderPulse 2s ease-in-out infinite alternate;
+    }
+    @keyframes matrixBorderPulse {
+      0% { stroke: #10b981; opacity: 0.8; }
+      100% { stroke: #4ade80; opacity: 1; }
+    }
+
+    /* Resplandor de marco de viñeta 2 (Dorado Amanecer) */
+    .border-sunrise-glow {
+      animation: sunriseBorderPulse 2s ease-in-out infinite alternate;
+    }
+    @keyframes sunriseBorderPulse {
+      0% { stroke: #f59e0b; opacity: 0.8; }
+      100% { stroke: #fde047; opacity: 1; }
+    }
+
+    /* Efecto Matrix de código cayendo */
+    .matrix-drop-1 { animation: matrixCascade 2s infinite linear; }
+    .matrix-drop-2 { animation: matrixCascade 2.4s infinite linear 0.4s; }
+    .matrix-drop-3 { animation: matrixCascade 1.8s infinite linear 0.9s; }
+    .matrix-drop-4 { animation: matrixCascade 2.6s infinite linear 0.2s; }
+    .matrix-drop-5 { animation: matrixCascade 2.2s infinite linear 0.7s; }
+    @keyframes matrixCascade {
+      0% { transform: translateY(-40px); opacity: 0; }
+      20% { opacity: 0.9; }
+      80% { opacity: 0.8; }
+      100% { transform: translateY(110px); opacity: 0; }
+    }
+
+    /* Barra de compilación CI/CD (rojo a verde) */
+    .pipeline-bar-fill {
+      animation: pipelineProgress 3.5s ease-in-out 94.7s forwards;
+    }
+    @keyframes pipelineProgress {
+      0% { width: 0px; fill: #ef4444; }
+      40% { width: 90px; fill: #f59e0b; }
+      80% { width: 170px; fill: #22c55e; }
+      100% { width: 185px; fill: #10b981; }
+    }
+
+    /* Amanecer / Sol naciente ascendiendo */
+    .sunrise-sun {
+      animation: sunRiseAnim 4s ease-out 94.7s forwards;
+    }
+    @keyframes sunRiseAnim {
+      0% { transform: translateY(25px) scale(0.9); opacity: 0.7; }
+      100% { transform: translateY(0px) scale(1); opacity: 1; }
+    }
+
+    /* Faro con luz verde 100% uptime */
+    .beacon-uptime-pulse {
+      animation: beaconGreenPulse 1.2s ease-in-out infinite alternate;
+    }
+    @keyframes beaconGreenPulse {
+      0% { opacity: 0.6; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1.3); }
+    }
+
+    /* Animación de la espada: inicia apuntando hacia el suelo y se alza en señal de victoria */
+    .sword-arm-raise {
+      transform-origin: 4px 6px;
+      animation: swordRaiseTrophy 1.8s cubic-bezier(0.2, 0.9, 0.3, 1.2) 95.7s forwards;
+      transform: rotate(135deg);
+    }
+    @keyframes swordRaiseTrophy {
+      0% {
+        transform: rotate(135deg);
+      }
+      35% {
+        transform: rotate(145deg);
+      }
+      80% {
+        transform: rotate(-10deg);
+      }
+      90% {
+        transform: rotate(4deg);
+      }
+      100% {
+        transform: rotate(0deg);
+      }
+    }
+
+    /* Brillo legendario cuando la espada alcanza la cima */
+    .sword-victory-sparkle {
+      opacity: 0;
+      animation: swordSparkleReveal 1.2s ease-out 97.3s forwards;
+    }
+    @keyframes swordSparkleReveal {
+      0% { opacity: 0; transform: scale(0.3) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.3) rotate(45deg); }
+      100% { opacity: 0.9; transform: scale(1) rotate(0deg); }
+    }
+
+    /* Destello del escudo sagrado y buff dorado */
+    .shield-sacred-glow {
+      animation: sacredBuffPulse 2s ease-in-out infinite alternate;
+    }
+    @keyframes sacredBuffPulse {
+      0% { filter: drop-shadow(0 0 3px #f59e0b); }
+      100% { filter: drop-shadow(0 0 10px #fde047); }
+    }
+
+    /* Diálogos del Action Log */
+    .log-line-1 { opacity: 0; animation: logFadeIn 0.35s ease-out 95.0s forwards; }
+    .log-line-2 { opacity: 0; animation: logFadeIn 0.35s ease-out 97.2s forwards; }
+    .log-line-3 { opacity: 0; animation: logFadeIn 0.35s ease-out 99.4s forwards; }
+    .log-line-4 { opacity: 0; animation: logFadeIn 0.35s ease-out 101.6s forwards; }
+    .log-line-5 { opacity: 0; animation: logFadeIn 0.35s ease-out 103.8s forwards; }
+    @keyframes logFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+
+  <!-- ================= FONDO GENERAL ================= -->
+  <rect width="800" height="390" rx="12" fill="url(#bgGradP6)" />
+
+  <!-- ================= FASE 1: ALERTA CRÍTICA Y APAGÓN (89.5s - 94.5s) ================= -->
+  <g class="waiting-phase">
+    <rect width="800" height="390" rx="12" fill="#040206" />
+
+    <!-- Borde retro de alerta roja -->
+    <rect x="20" y="20" width="760" height="350" rx="8" fill="none" stroke="#450a0a" stroke-width="2" />
+    <rect x="26" y="26" width="748" height="338" rx="6" fill="none" stroke="#2a0505" stroke-width="1" />
+
+    <!-- Terminal de Emergencia y Ojos del Pato en la oscuridad -->
+    <g transform="translate(400, 105)" text-anchor="middle">
+      <text class="retro-text alarm-blink-fast" x="0" y="0" font-size="13" fill="#ef4444" letter-spacing="3">
+        🚨 ALERTA CRÍTICA • KERNEL PANIC EN PRODUCCIÓN
+      </text>
+      
+      <!-- Ojos amarillos del pato brillando en medio de la oscuridad -->
+      <g transform="translate(-18, 22)">
+        <rect x="0" y="0" width="10" height="10" fill="#facc15" filter="url(#goldGlowP6)" />
+        <rect x="3" y="3" width="4" height="4" fill="#000000" />
+        
+        <rect x="24" y="0" width="10" height="10" fill="#facc15" filter="url(#goldGlowP6)" />
+        <rect x="27" y="3" width="4" height="4" fill="#000000" />
+      </g>
+
+      <text class="retro-text" x="0" y="62" font-size="10.5" fill="#fca5a5">
+        _ Detonando protocolo de emergencia... ejecutando auto_refactor.sh <tspan class="cursor-blink">█</tspan>
+      </text>
+    </g>
+
+    <!-- Barra de carga de emergencia (rojo/naranja - 5.0 segundos) -->
+    <g transform="translate(175, 230)">
+      <rect x="-4" y="-4" width="458" height="22" rx="4" fill="#0a0204" stroke="#7f1d1d" stroke-width="1.5" />
+      <rect class="sync-fill" x="0" y="0" width="450" height="14" rx="2" fill="#ef4444" />
+      <text class="retro-text" x="225" y="34" text-anchor="middle" font-size="9.5" fill="#f87171" letter-spacing="2">
+        ⏳ PURGANDO CÓDIGO LEGACY • FORZANDO COMPILACIÓN...
+      </text>
+    </g>
+  </g>
+
+  <!-- ================= FASE 2: ESCENA ACTIVA (CAPÍTULO VI: EL EPÍLOGO) ================= -->
+  <!-- 1. HUD SUPERIOR RESTAURADO (TOTALMENTE RECUPERADO) -->
+  <g class="chapter-scene">
+    <!-- Barra superior HUD -->
+    <rect x="20" y="10" width="760" height="36" rx="6" fill="#060c08" opacity="0.95" />
+    <rect x="20" y="10" width="760" height="36" rx="6" fill="none" stroke="#22c55e" stroke-width="1.5" />
+
+    <!-- Vida (HP 999) y Maná (MP 999) Full -->
+    <g transform="translate(36, 32)">
+      <text class="retro-text" x="0" y="0" font-size="12" fill="#22c55e">♥ HP 999/999</text>
+      <text class="retro-text" x="120" y="0" font-size="12" fill="#38bdf8">★ MP 999/999</text>
+      
+      <!-- Nombre del Héroe y Logro -->
+      <text class="retro-text" x="240" y="0" font-size="12" fill="#ffffff">⚔ gNOR-mu</text>
+      <text class="retro-text" x="330" y="0" font-size="11" fill="#facc15">(Guardián de Prod)</text>
+      
+      <!-- Buff Sistema Estable (Centrado con margen holgado) -->
+      <rect x="540" y="-14" width="175" height="18" rx="3" fill="#064e3b" stroke="#22c55e" stroke-width="1.2" />
+      <text class="retro-text" x="550" y="-1" font-size="9" fill="#86efac" letter-spacing="1">
+        ✨ BUFF: SISTEMA ESTABLE
+      </text>
+    </g>
+  </g>
+
+  <!-- ================= 2 VIÑETAS FINALES (DÍPTICO RETRO) ================= -->
+
+  <!-- ================= VIÑETA 1 (IZQ): EL PIPELINE FINAL ================= -->
+  <g class="chapter-scene" transform="translate(20, 52)">
+    <g clip-path="url(#clipV1)">
+      <!-- Fondo oscuro de terminal ancestral -->
+      <rect x="0" y="0" width="370" height="152" fill="#020805" />
+
+      <!-- Cascada de código Matrix verde cayendo de fondo -->
+      <g fill="#10b981" font-size="7" opacity="0.4" class="retro-text">
+        <text class="matrix-drop-1" x="25" y="0">010101 REFACTOR 01</text>
+        <text class="matrix-drop-2" x="110" y="0">GIT PUSH --FORCE-WITH-LEASE</text>
+        <text class="matrix-drop-3" x="200" y="0">DEBT_CLEARED = TRUE</text>
+        <text class="matrix-drop-4" x="285" y="0">BUILD: SUCCESS 100%</text>
+        <text class="matrix-drop-5" x="335" y="0">EXIT 0</text>
+      </g>
+
+      <!-- Terminal / Pantalla del Script -->
+      <g transform="translate(14, 30)">
+        <rect x="0" y="0" width="220" height="106" rx="4" fill="#01140c" stroke="#10b981" stroke-width="1.5" />
+        <rect x="0" y="0" width="220" height="14" fill="#064e3b" />
+        <circle cx="8" cy="7" r="2.5" fill="#ef4444" />
+        <circle cx="16" cy="7" r="2.5" fill="#f59e0b" />
+        <circle cx="24" cy="7" r="2.5" fill="#10b981" />
+        <text class="retro-text" x="32" y="11" font-size="8" fill="#a7f3d0">pipeline@ci-cd:~#</text>
+
+        <!-- Contenido de la consola -->
+        <text class="retro-text" x="10" y="32" font-size="8.5" fill="#34d399">
+          &gt; EXECUTING: auto_refactor.sh
+        </text>
+        <text class="retro-text" x="10" y="46" font-size="7.5" fill="#6ee7b7">
+          [OK] NullPointer deleted
+        </text>
+        <text class="retro-text" x="10" y="58" font-size="7.5" fill="#6ee7b7">
+          [OK] Technical debt = $0.00
+        </text>
+
+        <!-- Barra de Progreso del Pipeline -->
+        <g transform="translate(10, 72)">
+          <rect x="0" y="0" width="195" height="12" rx="2" fill="#042f20" stroke="#059669" stroke-width="1" />
+          <rect class="pipeline-bar-fill" x="2" y="2" width="0" height="8" rx="1" fill="#10b981" filter="url(#matrixGlowP6)" />
+        </g>
+        <text class="retro-text" x="10" y="96" font-size="7.5" fill="#a7f3d0">
+          STATUS: <tspan fill="#4ade80" font-weight="900">DEPLOYED TO PROD ✔</tspan>
+        </text>
+      </g>
+
+      <!-- Héroe y Pato observando la pantalla a la derecha -->
+      <g transform="translate(255, 46)">
+        <!-- Resplandor verde en el héroe -->
+        <circle cx="45" cy="50" r="40" fill="#059669" opacity="0.25" filter="url(#matrixGlowP6)" />
+
+        <!-- PATO DE GOMA EN LA CABEZA -->
+        <g transform="translate(24, 0)">
+          <rect x="0" y="8" width="36" height="22" rx="5" fill="#fbbf24" />
+          <rect x="3" y="5" width="28" height="10" rx="3" fill="#fef08a" />
+          <!-- Pico -->
+          <polygon points="-6,14 3,11 3,19" fill="#ea580c" />
+          <!-- Ojos felices (^ ^) -->
+          <text class="retro-text" x="10" y="15" font-size="9" fill="#000000">^ ^</text>
+        </g>
+
+        <!-- CABEZA DE gNOR-mu MIRANDO LA TERMINAL -->
+        <g transform="translate(14, 26)">
+          <rect x="8" y="2" width="48" height="34" rx="6" fill="#1e293b" />
+          <rect x="6" y="12" width="52" height="5" fill="#dc2626" />
+          <rect x="12" y="17" width="40" height="26" rx="3" fill="#fed7aa" />
+          <!-- Rostro de calma y alivio -->
+          <rect x="18" y="24" width="6" height="3" fill="#0f172a" />
+          <rect x="34" y="24" width="6" height="3" fill="#0f172a" />
+          <rect x="24" y="34" width="12" height="2" fill="#059669" />
+          <!-- Tinte verde reflejado -->
+          <rect x="12" y="17" width="40" height="26" fill="#10b981" opacity="0.2" />
+        </g>
+      </g>
+    </g>
+
+    <!-- Marco de la viñeta 1 -->
+    <rect class="border-matrix-glow" x="0" y="0" width="370" height="152" rx="6" fill="none" stroke="#10b981" stroke-width="2" />
+    <rect x="8" y="8" width="150" height="14" rx="2" fill="#064e3b" />
+    <text class="retro-text" x="14" y="19" font-size="8" fill="#86efac" letter-spacing="1">
+      💻 EL PIPELINE FINAL
+    </text>
+  </g>
+
+  <!-- ================= VIÑETA 2 (DER): AMANECER EN PROD (ESTILO PIXEL ART FIDEDIGNO) ================= -->
+  <g class="chapter-scene" transform="translate(410, 52)">
+    <g clip-path="url(#clipV2)">
+      <!-- Cielo del amanecer en gradiente crepuscular dorado -->
+      <rect x="0" y="0" width="370" height="152" fill="url(#sunriseSkyP6)" />
+
+      <!-- Sol naciente pixelado emergiendo en el horizonte -->
+      <g class="sunrise-sun" transform="translate(260, 65)">
+        <circle cx="0" cy="0" r="28" fill="#ffffff" />
+        <circle cx="0" cy="0" r="42" fill="#fde047" opacity="0.45" />
+        <circle cx="0" cy="0" r="62" fill="#fb923c" opacity="0.25" />
+      </g>
+
+      <!-- Cordillera pixel art en silueta y capas (idéntica a Partes 3, 4 y 5) -->
+      <polygon points="0,152 65,75 145,152" fill="#1e1b4b" opacity="0.8" />
+      <polygon points="100,152 225,42 370,152" fill="#0f172a" />
+      <polygon points="175,152 265,65 370,152" fill="#1e293b" opacity="0.75" />
+
+      <!-- Laderas iluminadas por la luz dorada del sol -->
+      <polygon points="65,75 145,152 65,152" fill="#d97706" opacity="0.3" />
+      <polygon points="225,42 370,152 225,152" fill="#f59e0b" opacity="0.35" />
+
+      <!-- CUMBRE CON EL RACK DE SERVIDORES RESTAURADO EN VERDE Y BANDERA DE UPTIME -->
+      <g transform="translate(225, 42)">
+        <!-- Servidor / Baliza ancestral en verde esmeralda -->
+        <rect x="-8" y="-12" width="16" height="20" rx="2" fill="#0f172a" stroke="#10b981" stroke-width="1.5" />
+        <rect x="-5" y="-8" width="4" height="2" fill="#4ade80" />
+        <rect x="1" y="-8" width="4" height="2" fill="#4ade80" />
+        <rect x="-5" y="-3" width="4" height="2" fill="#4ade80" />
+        <rect x="1" y="-3" width="4" height="2" fill="#4ade80" />
+        
+        <!-- Foco verde esmeralda con haz de luz de éxito -->
+        <circle class="beacon-uptime-pulse" cx="0" cy="-15" r="5" fill="#22c55e" filter="url(#matrixGlowP6)" />
+        <circle cx="0" cy="-15" r="2.5" fill="#ffffff" />
+        
+        <!-- Mástil de acero y Bandera UPTIME: 100% -->
+        <line x1="8" y1="-12" x2="8" y2="-32" stroke="#e2e8f0" stroke-width="1.5" />
+        <polygon points="8,-32 76,-24 8,-16" fill="#065f46" stroke="#22c55e" stroke-width="1" />
+        <text class="retro-text" x="12" y="-22" font-size="6.5" fill="#86efac" font-weight="900">UPTIME: 100%</text>
+      </g>
+
+      <!-- Pradera y colinas onduladas (Pixel Art de la saga) -->
+      <ellipse cx="180" cy="148" rx="220" ry="26" fill="#064e3b" />
+      <ellipse cx="60" cy="150" rx="140" ry="20" fill="#047857" />
+      <ellipse cx="300" cy="154" rx="160" ry="22" fill="#065f46" />
+
+      <!-- Pinos pixel art en el sendero derecho -->
+      <g transform="translate(320, 92)">
+        <rect x="7" y="24" width="4" height="18" fill="#1c1008" />
+        <polygon points="9,2 1,14 17,14" fill="#022c22" />
+        <polygon points="9,9 0,22 18,22" fill="#033d2f" />
+        <polygon points="9,16 -2,28 20,28" fill="#044e3b" />
+      </g>
+
+      <g transform="translate(292, 104) scale(0.75)">
+        <rect x="7" y="24" width="4" height="18" fill="#1c1008" />
+        <polygon points="9,2 1,14 17,14" fill="#022c22" />
+        <polygon points="9,9 0,22 18,22" fill="#033d2f" />
+        <polygon points="9,16 -2,28 20,28" fill="#044e3b" />
+      </g>
+
+      <!-- Tocón de roble ancestral en la pradera -->
+      <g transform="translate(145, 112) scale(0.65)">
+        <rect x="10" y="24" width="50" height="32" fill="#5c2e0b" rx="2" />
+        <rect x="6" y="30" width="58" height="26" fill="#78350f" rx="3" />
+        <ellipse cx="35" cy="24" rx="24" ry="8" fill="#a16207" stroke="#78350f" stroke-width="1.5" />
+        <ellipse cx="35" cy="24" rx="14" ry="4" fill="#ca8a04" />
+      </g>
+
+      <!-- ================= gNOR-mu PIXEL ART COMPLETO DE PIE CON PATO-YELMO Y ESPADA ================= -->
+      <g transform="translate(48, 62)">
+        <!-- Sombra en el pasto -->
+        <ellipse cx="28" cy="84" rx="18" ry="4" fill="#011410" opacity="0.6" />
+
+        <!-- Capa roja ondeando suavemente -->
+        <rect x="8" y="28" width="8" height="34" fill="#b91c1c" />
+        <rect x="4" y="34" width="6" height="30" fill="#991b1b" />
+
+        <!-- Botas de combate acorazadas -->
+        <rect x="18" y="68" width="8" height="10" fill="#334155" />
+        <rect x="16" y="74" width="11" height="4" fill="#1e293b" />
+        <rect x="28" y="68" width="8" height="10" fill="#475569" />
+        <rect x="26" y="74" width="11" height="4" fill="#1e293b" />
+
+        <!-- Pantalón / grebas -->
+        <rect x="19" y="54" width="16" height="15" fill="#1e1b4b" />
+
+        <!-- Cinturón con hebilla dorada -->
+        <rect x="17" y="51" width="20" height="4" fill="#78350f" />
+        <rect x="24" y="51" width="6" height="4" fill="#facc15" />
+
+        <!-- Coraza de acero de gNOR-mu -->
+        <rect x="17" y="28" width="20" height="24" fill="#38bdf8" />
+        <rect x="20" y="32" width="14" height="16" fill="#bae6fd" />
+        <!-- Hombreras -->
+        <rect x="12" y="26" width="7" height="8" fill="#0284c7" />
+        <rect x="35" y="26" width="7" height="8" fill="#0284c7" />
+
+        <!-- Brazo derecho sosteniendo el Escudo Legendario de la Saga -->
+        <g transform="translate(0, 30)">
+          <path d="M4,0 h14 v3 h3 v5 h3 v10 h-2 v5 h-2 v3 h-2 v3 h-2 v2 h-2 v-2 h-2 v-3 h-2 v-3 h-2 v-5 h-2 v-10 h3 v-5 h3 v-3 z" fill="#131024" />
+          <path d="M5,1 h12 v3 h3 v5 h3 v8 h-2 v5 h-2 v3 h-2 v3 h-2 v1 h-2 v-1 h-2 v-3 h-2 v-3 h-2 v-5 h-2 v-8 h3 v-5 h3 v-3 z" fill="#fdb813" />
+          <path d="M7,3 h8 v4 h3 v7 h-2 v5 h-2 v3 h-2 v2 h-2 v-2 h-2 v-3 h-2 v-5 h-2 v-7 h3 v-4 z" fill="#2b1f54" />
+          <rect x="9" y="6" width="4" height="11" fill="#00ffff" />
+          <rect x="6" y="9" width="10" height="4" fill="#00ffff" />
+          <rect x="10" y="7" width="2" height="9" fill="#ffffff" />
+          <rect x="7" y="10" width="8" height="2" fill="#ffffff" />
+        </g>
+
+        <!-- Cabeza, rostro y vincha roja del héroe -->
+        <rect x="18" y="10" width="16" height="18" fill="#fcd34d" />
+        <rect x="15" y="5" width="22" height="8" fill="#475569" />
+        <rect x="13" y="8" width="5" height="10" fill="#334155" />
+        <rect x="17" y="13" width="18" height="3" fill="#ef4444" />
+
+        <!-- Ojos felices del héroe (^ ^) con determinación y triunfo -->
+        <rect x="22" y="18" width="2" height="2" fill="#0f172a" />
+        <rect x="24" y="16" width="2" height="2" fill="#0f172a" />
+        <rect x="26" y="18" width="2" height="2" fill="#0f172a" />
+        <rect x="28" y="18" width="2" height="2" fill="#0f172a" />
+        <rect x="30" y="16" width="2" height="2" fill="#0f172a" />
+        <rect x="32" y="18" width="2" height="2" fill="#0f172a" />
+
+        <!-- PATO-YELMO LEGENDARIO EN LA CABEZA (COMPAÑERO FIEL) -->
+        <g transform="translate(12, -14) scale(0.8)">
+          <!-- Destello de corona dorada sobre el pato -->
+          <g filter="url(#goldGlowP6)" transform="translate(24, -4)">
+            <polygon points="0,-4 1,-1 4,0 1,1 0,4 -1,1 -4,0 -1,-1" fill="#ffffff" />
+          </g>
+          <!-- Cuerpo del pato -->
+          <ellipse cx="20" cy="20" rx="15" ry="10" fill="#facc15" />
+          <rect x="6" y="14" width="24" height="11" fill="#facc15" rx="3" />
+          <polygon points="4,20 0,13 8,17" fill="#eab308" />
+          <!-- Cabeza del pato -->
+          <circle cx="27" cy="11" r="8" fill="#facc15" />
+          <circle cx="27" cy="10" r="7" fill="#fde047" />
+          <!-- Pico naranja -->
+          <polygon points="34,11 42,13 35,16" fill="#ea580c" />
+          <!-- Ojo alegre del pato -->
+          <circle cx="29" cy="9" r="2.2" fill="#0f172a" />
+          <circle cx="30" cy="8.5" r="0.7" fill="#ffffff" />
+        </g>
+
+        <!-- Brazo izquierdo sosteniendo la Espada: Alza la espada en señal de victoria -->
+        <g transform="translate(35, 28)">
+          <g class="sword-arm-raise">
+            <!-- Hombro / Manga de armadura -->
+            <rect x="0" y="2" width="10" height="7" fill="#0284c7" />
+            <rect x="8" y="0" width="7" height="7" fill="#f59e0b" />
+            <!-- Empuñadura y guarda dorada -->
+            <rect x="13" y="-8" width="3" height="18" fill="#78350f" />
+            <rect x="11" y="0" width="7" height="3" fill="#facc15" />
+            <!-- Hoja brillante de la espada apuntando hacia arriba/cielo -->
+            <polygon points="12,0 14,-30 17,-34 20,-30 16,0" fill="#b2ebf2" />
+            <polygon points="14,0 15,-30 17,-34 18,-30 15,0" fill="#ffffff" />
+            <polygon points="17,-34 16,-30 18,-30" fill="#e0f7fa" />
+
+            <!-- Destello de gloria en la punta de la espada -->
+            <g class="sword-victory-sparkle" transform="translate(17, -34)" filter="url(#goldGlowP6)">
+              <polygon points="0,-6 2,-2 6,0 2,2 0,6 -2,2 -6,0 -2,-2" fill="#ffffff" />
+              <circle cx="0" cy="0" r="2" fill="#fde047" />
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+
+    <!-- Marco de la viñeta 2 -->
+    <rect class="border-sunrise-glow" x="0" y="0" width="370" height="152" rx="6" fill="none" stroke="#f59e0b" stroke-width="2" />
+    <rect x="8" y="8" width="165" height="14" rx="2" fill="#78350f" />
+    <text class="retro-text" x="14" y="19" font-size="8" fill="#fde047" letter-spacing="1">
+      🌅 AMANECER EN PROD
+    </text>
+  </g>
+
+  <!-- ================= CUADRO DE DIÁLOGO / ACTION LOG (ALINEADO EXACTO Y=210) ================= -->
+  <g class="chapter-scene" transform="translate(20, 210)">
+    <!-- Fondo translúcido caja de diálogo arcade de victoria -->
+    <rect x="0" y="0" width="760" height="165" rx="6" fill="#040c08" opacity="0.96" />
+    <rect x="0" y="0" width="760" height="165" rx="6" fill="none" stroke="#22c55e" stroke-width="2.5" />
+    <rect x="4" y="4" width="752" height="157" rx="4" fill="none" stroke="#064e3b" stroke-width="1.5" />
+
+    <!-- Esquinas decorativas doradas / esmeralda -->
+    <rect x="0" y="0" width="8" height="8" fill="#22c55e" />
+    <rect x="752" y="0" width="8" height="8" fill="#22c55e" />
+    <rect x="0" y="157" width="8" height="8" fill="#22c55e" />
+    <rect x="752" y="157" width="8" height="8" fill="#22c55e" />
+
+    <!-- Encabezado de la ventana -->
+    <g class="log-line-1">
+      <rect x="14" y="10" width="732" height="20" fill="#064e3b" />
+      <text class="retro-text" x="26" y="24" font-size="10" fill="#a7f3d0" letter-spacing="1">
+        👑 CRÓNICAS FINALES • EL DESPLIEGUE PERFECTO
+      </text>
+      <text class="retro-text" x="732" y="24" text-anchor="end" font-size="9" fill="#facc15" font-weight="900">
+        [MISIÓN CUMPLIDA • ALL GREEN]
+      </text>
+    </g>
+
+    <!-- LÍNEA 1: EL APAGÓN Y LA PURGA -->
+    <g class="log-line-1">
+      <text class="retro-text" x="24" y="54" font-size="10" fill="#cbd5e1">
+        ▶ El apagón da paso a un torrente de luz verde: el script ancestral purga hasta la última línea legacy.
+      </text>
+    </g>
+
+    <!-- LÍNEA 2: LA DEUDA TÉCNICA CERO -->
+    <g class="log-line-2">
+      <text class="retro-text" x="24" y="78" font-size="10" fill="#34d399">
+        🌿 La deuda técnica se desintegra en el aire... Los tests pasan al 100% y el build final es inmaculado.
+      </text>
+    </g>
+
+    <!-- LÍNEA 3: EL AMANECER Y EL FARO -->
+    <g class="log-line-3">
+      <text class="retro-text" x="24" y="102" font-size="10" fill="#fde047">
+        🌅 El sol se alza sobre el valle; en la cumbre remota, la bandera de Uptime 100% ondea victoriosa.
+      </text>
+    </g>
+
+    <!-- LÍNEA 4: EL PATO EN EL ESCUDO Y EL VÍNCULO -->
+    <g class="log-line-4">
+      <text class="retro-text" x="24" y="126" font-size="10" fill="#fbbf24">
+        🦆 El Pato de Goma descansa como el blasón sagrado de la orden. Ya nunca más debuggearemos solos.
+      </text>
+    </g>
+
+    <!-- LÍNEA 5: REMATE ÉPICO Y STATS MÁXIMAS -->
+    <g class="log-line-5">
+      <text class="retro-text" x="24" y="150" font-size="9.5" fill="#4ade80" letter-spacing="0.4">
+        ⚔ ♥ HP 999/999 • ★ MP 999/999: gNOR-mu contempla el reino en paz. Producción es segura una vez más.
+      </text>
+    </g>
+  </g>
+</svg>

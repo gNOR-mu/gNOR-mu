@@ -78,6 +78,16 @@
       to { opacity: 1; fill: #ffffff; }
     }
 
+    /* Gran Apagón del Sistema (89.5s) */
+    .grand-blackout {
+      opacity: 0;
+      animation: grandBlackoutFade 0.6s ease-out 89.5s forwards;
+      pointer-events: none;
+    }
+    @keyframes grandBlackoutFade {
+      to { opacity: 1; pointer-events: auto; }
+    }
+
     /* ================= FASE 2: ESCENA ACTIVA (68.5s en adelante) ================= */
     .chapter-scene {
       opacity: 0;
@@ -766,5 +776,8 @@
       </g>
     </g>
   </g>
+
+  <!-- Apagón general del sistema al expirar el contador de la intranet -->
+  <rect class="grand-blackout" width="800" height="390" rx="12" fill="#030106" />
 </svg>
 
