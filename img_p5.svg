@@ -50,20 +50,20 @@
       user-select: none;
     }
 
-    /* ================= FASE 1: ESPERA Y PREPARACIÓN (0.0s - 1.0s) =================
-       Modo de previsualización inmediata: 1.0s de carga.
+    /* ================= FASE 1: ESPERA Y PREPARACIÓN (0.0s - 68.5s) =================
+       Se activa 3s después del final de la Parte IV (65.5s + 3.0s = 68.5s).
     ================================================================================ */
     .waiting-phase {
-      animation: waitingFadeOut 0.35s ease-out 1.0s forwards;
+      animation: waitingFadeOut 0.4s ease-out 68.5s forwards;
     }
     @keyframes waitingFadeOut {
       from { opacity: 1; visibility: visible; }
       to { opacity: 0; visibility: hidden; display: none; }
     }
 
-    /* Barra de sincronización de 0.9s */
+    /* Barra de sincronización que llena en 68.0s */
     .sync-fill {
-      animation: syncFill 0.9s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+      animation: syncFill 68.0s cubic-bezier(0.2, 0, 0.2, 1) forwards;
     }
     @keyframes syncFill {
       0% { width: 0px; }
@@ -78,20 +78,20 @@
       to { opacity: 1; fill: #ffffff; }
     }
 
-    /* ================= FASE 2: ESCENA ACTIVA (1.0s en adelante) ================= */
+    /* ================= FASE 2: ESCENA ACTIVA (68.5s en adelante) ================= */
     .chapter-scene {
       opacity: 0;
       visibility: hidden;
-      animation: chapterSceneAppear 0.4s ease-out 1.0s forwards;
+      animation: chapterSceneAppear 0.5s ease-out 68.5s forwards;
     }
     @keyframes chapterSceneAppear {
       to { opacity: 1; visibility: visible; }
     }
 
-    /* Stats del HUD superior: aparecen tras finalizar la barra de carga (1.0s) */
+    /* Stats del HUD superior: aparecen tras finalizar la barra de carga (68.5s) */
     .hud-appear {
       opacity: 0;
-      animation: hudFadeIn 0.4s ease-out 1.0s forwards;
+      animation: hudFadeIn 0.5s ease-out 68.5s forwards;
     }
     @keyframes hudFadeIn {
       from { opacity: 0; transform: translateY(-4px); }
@@ -107,10 +107,10 @@
       100% { fill: #c084fc; }
     }
 
-    /* Notificación de URL parpadeante (aparece a las 9.0s con la línea 4) */
+    /* Notificación de URL parpadeante (aparece a las 76.5s con la línea 4) */
     .notif-badge {
       opacity: 0;
-      animation: notifAppear 0.4s ease-out 9.0s forwards;
+      animation: notifAppear 0.4s ease-out 76.5s forwards;
     }
     @keyframes notifAppear {
       to { opacity: 1; }
@@ -123,10 +123,10 @@
       100% { fill: #15803d; stroke: #86efac; }
     }
 
-    /* Transición progresiva del atardecer a noche cerrada (1.0s a 6.5s) */
+    /* Transición progresiva del atardecer a noche cerrada (68.5s a 74.0s) */
     .night-overlay {
       opacity: 0;
-      animation: nightFallAnim 5.5s ease-in-out 1.0s forwards;
+      animation: nightFallAnim 5.5s ease-in-out 68.5s forwards;
     }
     @keyframes nightFallAnim {
       0% { opacity: 0; }
@@ -135,17 +135,17 @@
 
     /* Puesta de sol hundiéndose en el horizonte */
     .sun-setting {
-      animation: sunDescend 5.5s ease-in 1.0s forwards;
+      animation: sunDescend 5.5s ease-in 68.5s forwards;
     }
     @keyframes sunDescend {
       0% { transform: translateY(0); opacity: 1; }
       100% { transform: translateY(110px); opacity: 0; }
     }
 
-    /* Salida de la luna en la noche */
+    /* Salida de la luna en la noche (aparece a las 71.5s) */
     .moon-rise {
       opacity: 0;
-      animation: moonAppear 4s ease-out 4.0s forwards;
+      animation: moonAppear 4s ease-out 71.5s forwards;
     }
     @keyframes moonAppear {
       0% { opacity: 0; transform: translateY(20px); }
@@ -179,14 +179,14 @@
       100% { transform: rotate(25deg); opacity: 0.85; }
     }
 
-    /* Ondas electromagnéticas / WiFi emitidas por el Pato-Yelmo (a las 6.5s con la Línea 3) */
+    /* Ondas electromagnéticas / WiFi emitidas por el Pato-Yelmo (a las 74.0s con la Línea 3) */
     .wifi-wave {
       opacity: 0;
-      animation: wifiRings 1.4s ease-out 6.5s infinite;
+      animation: wifiRings 1.4s ease-out 74.0s infinite;
     }
     .wifi-wave-delay {
       opacity: 0;
-      animation: wifiRings 1.4s ease-out 7.2s infinite;
+      animation: wifiRings 1.4s ease-out 74.7s infinite;
     }
     @keyframes wifiRings {
       0% { opacity: 0.9; transform: scale(0.3) translateY(0); }
@@ -194,10 +194,10 @@
       100% { opacity: 0; transform: scale(1.6) translateY(-14px); }
     }
 
-    /* Ping celestial / sobre de mensaje flotando sobre el héroe a las 9.0s */
+    /* Ping celestial / sobre de mensaje flotando sobre el héroe a las 76.5s */
     .ping-envelope {
       opacity: 0;
-      animation: pingEnvelopeFloat 1.2s cubic-bezier(0.2, 0.8, 0.3, 1) 9.0s forwards;
+      animation: pingEnvelopeFloat 1.2s cubic-bezier(0.2, 0.8, 0.3, 1) 76.5s forwards;
     }
     @keyframes pingEnvelopeFloat {
       0% { opacity: 0; transform: translateY(15px) scale(0.6); }
@@ -224,36 +224,36 @@
       100% { transform: translate(30px, -25px); opacity: 0.2; }
     }
 
-    /* Diálogos del Action Log: 2.5s por línea tras 1.0s */
-    .log-line-1 { opacity: 0; animation: logFadeIn 0.35s ease-out 1.5s forwards; }
-    .log-line-2 { opacity: 0; animation: logFadeIn 0.35s ease-out 4.0s forwards; }
-    .log-line-3 { opacity: 0; animation: logFadeIn 0.35s ease-out 6.5s forwards; }
-    .log-line-4 { opacity: 0; animation: logFadeIn 0.35s ease-out 9.0s forwards; }
-    .log-line-5 { opacity: 0; animation: logFadeIn 0.35s ease-out 11.5s forwards; }
+    /* Diálogos del Action Log sincronizados con la cronología global */
+    .log-line-1 { opacity: 0; animation: logFadeIn 0.35s ease-out 69.0s forwards; }
+    .log-line-2 { opacity: 0; animation: logFadeIn 0.35s ease-out 71.5s forwards; }
+    .log-line-3 { opacity: 0; animation: logFadeIn 0.35s ease-out 74.0s forwards; }
+    .log-line-4 { opacity: 0; animation: logFadeIn 0.35s ease-out 76.5s forwards; }
+    .log-line-5 { opacity: 0; animation: logFadeIn 0.35s ease-out 79.0s forwards; }
     @keyframes logFadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
 
     /* ================= CUENTA REGRESIVA DE 10 SEGUNDOS =================
-       Empieza con la línea 5 (a los 11.5s).
-       Cada segundo (11.5s a 21.5s) cambia de número 10 -> 0.
+       Empieza con la línea 5 (a los 79.0s).
+       Cada segundo (79.0s a 89.0s) cambia de número 10 -> 0.
     ==================================================================== */
     .cd-panel {
       opacity: 0;
-      animation: logFadeIn 0.4s ease-out 11.5s forwards;
+      animation: logFadeIn 0.4s ease-out 79.0s forwards;
     }
-    .cd-10 { opacity: 0; animation: cdStep 1s step-end 11.5s forwards; }
-    .cd-9  { opacity: 0; animation: cdStep 1s step-end 12.5s forwards; }
-    .cd-8  { opacity: 0; animation: cdStep 1s step-end 13.5s forwards; }
-    .cd-7  { opacity: 0; animation: cdStep 1s step-end 14.5s forwards; }
-    .cd-6  { opacity: 0; animation: cdStep 1s step-end 15.5s forwards; }
-    .cd-5  { opacity: 0; animation: cdStep 1s step-end 16.5s forwards; }
-    .cd-4  { opacity: 0; animation: cdStep 1s step-end 17.5s forwards; }
-    .cd-3  { opacity: 0; animation: cdStep 1s step-end 18.5s forwards; }
-    .cd-2  { opacity: 0; animation: cdStep 1s step-end 19.5s forwards; }
-    .cd-1  { opacity: 0; animation: cdStep 1s step-end 20.5s forwards; }
-    .cd-0  { opacity: 0; animation: cdZeroStay 0.4s ease-out 21.5s forwards; }
+    .cd-10 { opacity: 0; animation: cdStep 1s step-end 79.0s forwards; }
+    .cd-9  { opacity: 0; animation: cdStep 1s step-end 80.0s forwards; }
+    .cd-8  { opacity: 0; animation: cdStep 1s step-end 81.0s forwards; }
+    .cd-7  { opacity: 0; animation: cdStep 1s step-end 82.0s forwards; }
+    .cd-6  { opacity: 0; animation: cdStep 1s step-end 83.0s forwards; }
+    .cd-5  { opacity: 0; animation: cdStep 1s step-end 84.0s forwards; }
+    .cd-4  { opacity: 0; animation: cdStep 1s step-end 85.0s forwards; }
+    .cd-3  { opacity: 0; animation: cdStep 1s step-end 86.0s forwards; }
+    .cd-2  { opacity: 0; animation: cdStep 1s step-end 87.0s forwards; }
+    .cd-1  { opacity: 0; animation: cdStep 1s step-end 88.0s forwards; }
+    .cd-0  { opacity: 0; animation: cdZeroStay 0.4s ease-out 89.0s forwards; }
 
     @keyframes cdStep {
       0% { opacity: 1; visibility: visible; }
