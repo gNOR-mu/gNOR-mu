@@ -28,10 +28,10 @@
       user-select: none;
     }
 
-    /* Flotación suave del escudo y espada */
+    /* Impacto en el escudo al recibir el golpe del bug a los 5.5s (Línea 2) */
     .crest-container {
       transform-origin: 400px 115px;
-      animation: spawnAndFloat 4s ease-in-out infinite, shieldHitOnce 0.4s ease-out 4.4s;
+      animation: spawnAndFloat 4s ease-in-out infinite, shieldHitOnce 0.4s ease-out 5.5s;
     }
 
     @keyframes spawnAndFloat {
@@ -39,7 +39,7 @@
       50% { transform: translateY(-6px); }
     }
 
-    /* Impacto en el escudo al recibir el golpe del bug a los 4.4s */
+    /* Impacto en el escudo al recibir el golpe del bug a los 5.5s */
     @keyframes shieldHitOnce {
       0% { transform: translate(0, 0) scale(1); }
       25% { transform: translate(-4px, 2px) scale(0.98); }
@@ -71,12 +71,12 @@
        0.0s - 2.5s: Carga inicial de la ROM/Perfil
        2.5s - 2.9s: Desvanecimiento de la barra
        2.9s: Aparece el BATTLE LOG
-       3.2s: LÍNEA 1: "⚠ ¡Un BUG salvaje [NullPointerException] emboscó al héroe!"
-       4.4s: LÍNEA 2: "⚡ ¡El BUG lanzó 'Excepción No Controlada'!" (-12 HP)
-       5.8s: LÍNEA 3: "🗡 ¡El HÉROE contraatacó con 'git commit'!" (-100 MP)
-       7.2s: LÍNEA 4: "💥 ¡GOLPE CRÍTICO! ¡BUG DERROTADO!"
-       8.5s: LÍNEA 5: "★ ¡VICTORIA! +1337 EXP..."
-       ESTADO FINAL: PERMANECE EN PANTALLA DE FORMA INDEFINIDA
+       3.0s: LÍNEA 1: "⚠ ¡Un BUG salvaje [NullPointerException] emboscó al héroe!"
+       5.5s: LÍNEA 2: "⚡ ¡El BUG lanzó 'Excepción No Controlada'!" (-12 HP)
+       8.0s: LÍNEA 3: "🗡 ¡El HÉROE contraatacó con 'git commit'!" (-100 MP)
+       10.5s: LÍNEA 4: "💥 ¡GOLPE CRÍTICO! ¡BUG DERROTADO!"
+       13.0s: LÍNEA 5: "★ ¡VICTORIA! +1337 EXP..."
+       TOTAL CAPÍTULO I: ~13.0s (Termina en 13.0s)
     ======================================================================================== */
 
     /* Desvanecimiento de la barra de carga tras completarse */
@@ -105,36 +105,36 @@
       to { visibility: hidden; }
     }
 
-    /* Ventana del BATTLE LOG (Aparece a los 2.9s y queda permanente) */
+    /* Ventana del BATTLE LOG (Aparece a los 2.8s y queda permanente) */
     .battle-window {
       opacity: 0;
       visibility: hidden;
-      animation: battleWindowAppear 0.4s ease-out 2.9s forwards;
+      animation: battleWindowAppear 0.4s ease-out 2.8s forwards;
     }
     @keyframes battleWindowAppear {
       to { opacity: 1; visibility: visible; }
     }
 
-    /* Aparición escalonada de cada línea del log (permanentes con forwards) */
+    /* Aparición escalonada de cada línea del log con 2.5s de intervalo */
     .log-line-1 {
       opacity: 0;
-      animation: logLineFadeIn 0.3s ease-out 3.2s forwards;
+      animation: logLineFadeIn 0.35s ease-out 3.0s forwards;
     }
     .log-line-2 {
       opacity: 0;
-      animation: logLineFadeIn 0.3s ease-out 4.4s forwards;
+      animation: logLineFadeIn 0.35s ease-out 5.5s forwards;
     }
     .log-line-3 {
       opacity: 0;
-      animation: logLineFadeIn 0.3s ease-out 5.8s forwards;
+      animation: logLineFadeIn 0.35s ease-out 8.0s forwards;
     }
     .log-line-4 {
       opacity: 0;
-      animation: logLineFadeIn 0.3s ease-out 7.2s forwards;
+      animation: logLineFadeIn 0.35s ease-out 10.5s forwards;
     }
     .log-line-5 {
       opacity: 0;
-      animation: logLineFadeIn 0.3s ease-out 8.5s forwards;
+      animation: logLineFadeIn 0.35s ease-out 13.0s forwards;
     }
 
     @keyframes logLineFadeIn {
@@ -202,28 +202,28 @@
   <g class="retro-text">
     <!-- Stats del héroe: Aparecen al finalizar la barra de carga (2.5s) -->
     <g class="hud-appear">
-      <!-- VIDA (HP): Inicialmente 999/999, a los 4.4s se oculta y emerge 987/999 con destello -->
+      <!-- VIDA (HP): Inicialmente 999/999, a los 5.5s se oculta y emerge 987/999 con destello -->
       <text x="36" y="42" font-size="12" fill="#ff4b72">
         ♥ HP 999/999
-        <set attributeName="visibility" to="hidden" begin="4.4s" fill="freeze" />
+        <set attributeName="visibility" to="hidden" begin="5.5s" fill="freeze" />
       </text>
       <text x="36" y="42" font-size="12" fill="#ff4b72" visibility="hidden">
         ♥ HP 987/999
-        <set attributeName="visibility" to="visible" begin="4.4s" fill="freeze" />
-        <set attributeName="fill" to="#ffffff" begin="4.4s" dur="0.2s" />
-        <set attributeName="fill" to="#ff0055" begin="4.6s" dur="0.4s" />
+        <set attributeName="visibility" to="visible" begin="5.5s" fill="freeze" />
+        <set attributeName="fill" to="#ffffff" begin="5.5s" dur="0.2s" />
+        <set attributeName="fill" to="#ff0055" begin="5.7s" dur="0.4s" />
       </text>
 
-      <!-- MANÁ (MP): Inicialmente 999/999, a los 5.8s se oculta y emerge 899/999 con destello -->
+      <!-- MANÁ (MP): Inicialmente 999/999, a los 8.0s se oculta y emerge 899/999 con destello -->
       <text x="180" y="42" font-size="12" fill="#00d2ff">
         ★ MP 999/999
-        <set attributeName="visibility" to="hidden" begin="5.8s" fill="freeze" />
+        <set attributeName="visibility" to="hidden" begin="8.0s" fill="freeze" />
       </text>
       <text x="180" y="42" font-size="12" fill="#00d2ff" visibility="hidden">
         ★ MP 899/999
-        <set attributeName="visibility" to="visible" begin="5.8s" fill="freeze" />
-        <set attributeName="fill" to="#ffffff" begin="5.8s" dur="0.2s" />
-        <set attributeName="fill" to="#38ef7d" begin="6.0s" dur="0.4s" />
+        <set attributeName="visibility" to="visible" begin="8.0s" fill="freeze" />
+        <set attributeName="fill" to="#ffffff" begin="8.0s" dur="0.2s" />
+        <set attributeName="fill" to="#38ef7d" begin="8.2s" dur="0.4s" />
       </text>
 
       <!-- Nombre del jugador / cuenta (Debajo del HP: x=36, y=60) -->

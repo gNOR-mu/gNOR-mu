@@ -30,22 +30,22 @@
       50% { transform: translateY(-4px); }
     }
 
-    /* ================= FASE 1: ESPERA Y PREPARACIÓN (0.0s - 12.5s) =================
-       Se muestra mientras el Capítulo I libra el combate (+4 segundos tras la victoria).
+    /* ================= FASE 1: ESPERA Y PREPARACIÓN (0.0s - 16.0s) =================
+       Se muestra mientras el Capítulo I libra el combate (13.0s) + 3 segundos = 16.0s.
        Contiene barra de carga de resonancia y la cita de Sephiroth.
-       A los 12.5s se desvanece de forma definitiva.
+       A los 16.0s se desvanece de forma definitiva.
     ================================================================================ */
     .waiting-phase {
-      animation: waitingFadeOut 0.5s ease-out 12.5s forwards;
+      animation: waitingFadeOut 0.5s ease-out 16.0s forwards;
     }
     @keyframes waitingFadeOut {
       from { opacity: 1; visibility: visible; }
       to { opacity: 0; visibility: hidden; display: none; }
     }
 
-    /* Barra de resonancia que se llena de 0% a 100% en 12.2 segundos */
+    /* Barra de resonancia que se llena de 0% a 100% en 15.5 segundos */
     .sync-fill {
-      animation: syncFill 12.2s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+      animation: syncFill 15.5s cubic-bezier(0.2, 0, 0.2, 1) forwards;
     }
     @keyframes syncFill {
       0% { width: 0px; }
@@ -60,20 +60,20 @@
       to { opacity: 1; fill: #ffffff; }
     }
 
-    /* ================= FASE 2: CAPÍTULO II ACTIVO (12.5s en adelante, permanente) ================= */
+    /* ================= FASE 2: CAPÍTULO II ACTIVO (16.0s en adelante, permanente) ================= */
     .chapter-scene {
       opacity: 0;
       visibility: hidden;
-      animation: chapter2SceneAppear 0.5s ease-out 12.6s forwards;
+      animation: chapter2SceneAppear 0.5s ease-out 16.0s forwards;
     }
     @keyframes chapter2SceneAppear {
       to { opacity: 1; visibility: visible; }
     }
 
-    /* Temblores del cofre antes de abrirse (a los 14.5s) */
+    /* Temblores del cofre antes de abrirse (a los 18.0s) */
     .chest-shake-anim {
       transform-origin: 48px 45px;
-      animation: chestRattle 0.8s ease-in-out 14.5s;
+      animation: chestRattle 0.8s ease-in-out 18.0s;
     }
     @keyframes chestRattle {
       0%, 100% { transform: translate(0, 0); }
@@ -83,22 +83,22 @@
       80% { transform: translate(3px, 1px) rotate(1deg); }
     }
 
-    /* Apertura de la tapa del cofre (a los 15.2s, permanente abierta) */
+    /* Apertura de la tapa del cofre (a los 18.7s, permanente abierta) */
     .chest-lid {
       transform-origin: 4px 16px;
-      animation: lidOpen 0.5s cubic-bezier(0.2, 0.8, 0.3, 1.2) 15.2s forwards;
+      animation: lidOpen 0.5s cubic-bezier(0.2, 0.8, 0.3, 1.2) 18.7s forwards;
     }
     @keyframes lidOpen {
       0% { transform: rotate(0deg) translateY(0); }
       100% { transform: rotate(-55deg) translate(-10px, -20px); }
     }
 
-    /* Objeto maldito saliendo del cofre hacia arriba (a los 15.6s, permanente flotando) */
+    /* Objeto maldito saliendo del cofre hacia arriba (a los 21.0s con el evento 3) */
     .cursed-artifact-anim {
       opacity: 0;
       transform-origin: 28px 28px;
-      animation: artifactEmerge 1s cubic-bezier(0.1, 0.9, 0.2, 1) 15.6s forwards,
-                 artifactFloat 3s ease-in-out 16.6s infinite alternate;
+      animation: artifactEmerge 1s cubic-bezier(0.1, 0.9, 0.2, 1) 21.0s forwards,
+                 artifactFloat 3s ease-in-out 22.0s infinite alternate;
     }
     @keyframes artifactEmerge {
       0% {
@@ -129,22 +129,26 @@
       100% { opacity: 0; transform: translateY(-35px) scale(1.4); }
     }
 
-    /* Diálogos de la historia que van apareciendo y quedan fijos indefinidamente */
+    /* Diálogos de la historia que van apareciendo con 2.5s entre cada uno */
     .story-line-1 {
       opacity: 0;
-      animation: storyFadeIn 0.4s ease-out 13.0s forwards;
+      animation: storyFadeIn 0.35s ease-out 16.5s forwards;
     }
     .story-line-2 {
       opacity: 0;
-      animation: storyFadeIn 0.4s ease-out 14.3s forwards;
+      animation: storyFadeIn 0.35s ease-out 19.0s forwards;
     }
     .story-line-3 {
       opacity: 0;
-      animation: storyFadeIn 0.4s ease-out 15.8s forwards;
+      animation: storyFadeIn 0.35s ease-out 21.5s forwards;
     }
     .story-line-4 {
       opacity: 0;
-      animation: storyFadeIn 0.4s ease-out 17.0s forwards;
+      animation: storyFadeIn 0.35s ease-out 24.0s forwards;
+    }
+    .story-line-5 {
+      opacity: 0;
+      animation: storyFadeIn 0.35s ease-out 26.5s forwards;
     }
     @keyframes storyFadeIn {
       from { opacity: 0; }
@@ -158,10 +162,10 @@
       to { visibility: hidden; }
     }
 
-    /* Debuff bajo el nombre del héroe que aparece con la Deuda Técnica (a los 17.0s) */
+    /* Debuff bajo el nombre del héroe que aparece con la Deuda Técnica (a los 24.0s) */
     .debuff-hud {
       opacity: 0;
-      animation: debuffAppear 0.4s ease-out 17.0s forwards;
+      animation: debuffAppear 0.4s ease-out 24.0s forwards;
     }
     @keyframes debuffAppear {
       from { opacity: 0; transform: translateY(-3px); }
@@ -175,10 +179,10 @@
       100% { fill: #c084fc; }
     }
 
-    /* Aparición de las stats superiores tras terminar la barra de sincronización (12.5s) */
+    /* Aparición de las stats superiores tras terminar la barra de sincronización (16.0s) */
     .hud-appear {
       opacity: 0;
-      animation: hudFadeIn 0.5s ease-out 12.5s forwards;
+      animation: hudFadeIn 0.5s ease-out 16.0s forwards;
     }
     @keyframes hudFadeIn {
       from { opacity: 0; transform: translateY(-4px); }
@@ -517,8 +521,8 @@
       </text>
     </g>
 
-    <!-- EVENTO 5: CONTINUARÁ / PREPARATIVOS (17.0s en adelante) -->
-    <g class="story-line-4">
+    <!-- EVENTO 5: CONTINUARÁ / PREPARATIVOS (en adelante) -->
+    <g class="story-line-5">
       <text class="retro-text" x="24" y="150" font-size="10" fill="#f43f5e" letter-spacing="1">
         <tspan class="alert-blink">▶ </tspan>CONTINUARÁ EN LA PARTE III: EL RITUAL DE REFACTORIZACIÓN...
       </text>
